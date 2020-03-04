@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Atala Prism Demo</title>
+    <meta name="description" content="Atala Prism Demo" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+         /* background: transparent;  */
+         background: #fff;
+      }
+
+      .loaded {
+        opacity: 0.0;
+        filter: blur(2ex);
+        transition: opacity 3s, filter 3s, visibility 3s;
+        visibility: hidden;
+      }
+
+      canvas {
+        width: 100%;
+        height: 100%;
+        position: absolute;  
+      }
+
+      .root {
+        height: 100%;
+        /* position: relative; */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
