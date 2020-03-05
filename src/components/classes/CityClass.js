@@ -8,6 +8,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 // classes
 import BaseClass from './BaseClass'
 import LoadingManagerClass from './LoadingManagerClass'
+import DatGUIClass from './DatGUIClass'
 
 // models
 // import model from '../../assets/models/city.glb'
@@ -17,44 +18,66 @@ class CityClass extends BaseClass {
   init () {
     this.blades = []
     this.rotation = 0
+
     return new Promise((resolve, reject) => {
       let that = this
 
       this.GLTFLoader = new GLTFLoader(LoadingManagerClass.getInstance().loadingManager)
 
-      const buildingMaterial = new MeshStandardMaterial({
-        color: new Color(0xe8f3ff),
-        roughness: 0.6,
-        metalness: 0.2,
+      this.buildingMaterial = new MeshStandardMaterial({
+        color: this.config.materials.buildingColor,
+        roughness: 1.0,
+        metalness: 0.0,
+        flatShading: true
+
+      })
+
+      this.roadsMaterial = new MeshStandardMaterial({
+        color: this.config.materials.roadsColor,
+        roughness: 1.0,
+        metalness: 0.0,
         flatShading: true
       })
 
-      const roadsMaterial = new MeshStandardMaterial({
-        color: new Color(0xaaaaaa),
-        roughness: 0.6,
-        metalness: 0.2,
+      this.vehicleMaterial = new MeshStandardMaterial({
+        color: this.config.materials.vehicleColor,
+        roughness: 1.0,
+        metalness: 0.0,
         flatShading: true
       })
 
-      const vehicleMaterial = new MeshStandardMaterial({
-        color: new Color(0xe4c2fc),
-        roughness: 0.6,
-        metalness: 0.2,
+      this.treeMaterial = new MeshStandardMaterial({
+        color: this.config.materials.treeColor,
+        roughness: 1.0,
+        metalness: 0.0,
         flatShading: true
       })
 
-      const treeMaterial = new MeshStandardMaterial({
-        color: new Color(0x9efe59),
-        roughness: 0.6,
-        metalness: 0.2,
+      this.turbineMaterial = new MeshStandardMaterial({
+        color: this.config.materials.turbineColor,
+        roughness: 1.0,
+        metalness: 0.0,
         flatShading: true
       })
 
-      const turbineMaterial = new MeshStandardMaterial({
-        color: new Color(0xffffff),
-        roughness: 0.6,
-        metalness: 0.2,
-        flatShading: true
+      this.controls = DatGUIClass.getInstance().gui.addFolder('Materials')
+      this.controls.addColor(this.config.materials, 'buildingColor').name('Building Color').onChange((color) => {
+        this.buildingMaterial.color.set(color)
+      })
+      this.controls.add(this.buildingMaterial, 'roughness').name('Building Roughness')
+      this.controls.add(this.buildingMaterial, 'metalness').name('Building Metalness')
+
+      this.controls.addColor(this.config.materials, 'roadsColor').name('Road Color').onChange((color) => {
+        this.roadsMaterial.color.set(color)
+      })
+      this.controls.addColor(this.config.materials, 'vehicleColor').name('Vehicle Color').onChange((color) => {
+        this.vehicleMaterial.color.set(color)
+      })
+      this.controls.addColor(this.config.materials, 'treeColor').name('Tree Color').onChange((color) => {
+        this.treeMaterial.color.set(color)
+      })
+      this.controls.addColor(this.config.materials, 'turbineColor').name('Turbine Color').onChange((color) => {
+        this.turbineMaterial.color.set(color)
       })
 
       this.GLTFLoader.load(
@@ -72,34 +95,31 @@ class CityClass extends BaseClass {
               case 'trees3':
                 object.children.forEach((treeParent) => {
                   treeParent.children.forEach((tree) => {
-                    tree.children[0].material = treeMaterial
+                    tree.children[0].material = this.treeMaterial
                     tree.children[0].receiveShadow = true
                     tree.children[0].castShadow = true
 
-                    tree.children[1].material = roadsMaterial
+                    tree.children[1].material = this.roadsMaterial
                     tree.children[1].receiveShadow = true
                     tree.children[1].castShadow = true
                   })
                 })
                 break
               case 'bus':
-                object.material = vehicleMaterial
+                object.material = this.vehicleMaterial
                 break
               case 'car':
-                object.material = vehicleMaterial
+                object.material = this.vehicleMaterial
                 break
               case 'roads':
-                object.translateY(0.15)
-                object.material = roadsMaterial
+                object.material = this.roadsMaterial
                 break
               case 'turbine_blades':
               case 'turbine_blades1':
                 object.children.forEach((turbine) => {
                   turbine.children.forEach((part) => {
-                    console.log(part)
-
                     that.blades.push(part)
-                    part.material = turbineMaterial
+                    part.material = this.turbineMaterial
                     part.receiveShadow = true
                     part.castShadow = true
                   })
@@ -110,21 +130,29 @@ class CityClass extends BaseClass {
               case 'turbine_bases1':
                 object.children.forEach((turbine) => {
                   turbine.children.forEach((part) => {
-                    part.material = turbineMaterial
+                    part.material = this.turbineMaterial
                     part.receiveShadow = true
                     part.castShadow = true
                   })
                 })
 
                 break
+              // case 'panels':
+              // case 'panels1':
+              // case 'panels2':
+              // case 'panels3':
+              // case 'panels4':
+              // case 'panels5':
+              //   console.log(object)
+              //   break
               default:
-                object.material = buildingMaterial
+                object.material = this.buildingMaterial
                 break
             }
           })
 
           resolve(gltf.scene)
-        }
+        }.bind(this)
       )
     }).catch((e) => {
       console.log(e)
@@ -133,8 +161,8 @@ class CityClass extends BaseClass {
 
   renderFrame ({ dt } = {}) {
     if (this.blades.length > 0) {
-      this.blades.forEach((blade) => {
-        blade.rotateX(dt)
+      this.blades.forEach((blade, i) => {
+        blade.rotateX(dt + (i * 0.001))
       })
     }
   }

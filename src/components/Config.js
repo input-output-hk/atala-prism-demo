@@ -24,8 +24,16 @@ class Config {
         height: window.innerHeight,
         bgColor: new Color(0x000000),
         canvasID: 'stage', // ID of webgl canvas element
-        ambientLightColor: 0xffffff,
-        ambientLightIntensity: 0.75
+        ambientLightColor: 0xd8efff,
+        ambientLightIntensity: 0.72
+      },
+      materials: {
+        buildingColor: 0xdde9ff,
+        roadsColor: 0xaaaaaa,
+        vehicleColor: 0xe4c2fc,
+        treeColor: 0x9efe59,
+        turbineColor: 0xffffff,
+        groundColor: 0xc1deb8
       },
       post: {
         enabled: false,
@@ -36,8 +44,7 @@ class Config {
       },
       camera: {
         fov: 20,
-        // initPos: { x: -10, y: 80, z: -50 },
-        initPos: { x: -265.1976211290428, y: 148.83128659781363, z: 302.01536118535745 },
+        initPos: { x: -265.1976211290428, y: 190, z: 302.01536118535745 },
         near: 0.1,
         far: 20000,
         enableZoom: true // enable camera zoom on mousewheel/pinch gesture

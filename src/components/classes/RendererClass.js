@@ -12,7 +12,8 @@ class RendererClass extends BaseClass {
       antialias: true,
       canvas: this.canvas,
       powerPreference: 'high-performance',
-      alpha: true
+      alpha: true,
+      logarithmicDepthBuffer: true
     })
 
     this.renderer.shadowMap.enabled = true

@@ -4,8 +4,7 @@
 import React, { Component } from 'react'
 import {
   Clock,
-  Vector2,
-  CameraHelper
+  Vector2
 } from 'three'
 
 import EventEmitter from 'eventemitter3'
@@ -28,14 +27,12 @@ import ControlsClass from './classes/ControlsClass'
 import MouseClass from './classes/MouseClass'
 import TouchClass from './classes/TouchClass'
 import AmbientLightClass from './classes/AmbientLightClass'
-import DirectionalLightClass from './classes/SpotLightClass'
-import HighlightBuildingsClass from './classes/HighlightBuildingsClass'
+import SpotLightClass from './classes/SpotLightClass'
 import SplineClass from './classes/SplineClass'
 import GroundClass from './classes/GroundClass'
 import CitySceneClass from './classes/CitySceneClass'
 import CityClass from './classes/CityClass'
 import DatGUIClass from './classes/DatGUIClass'
-import SpotLightClass from './classes/SpotLightClass'
 
 /* ------------------------------------------
 Styles
@@ -113,14 +110,15 @@ class Main extends mixin(EventEmitter, Component) {
     CameraClass.getInstance().init()
     RendererClass.getInstance().init()
     AmbientLightClass.getInstance().init()
-    DirectionalLightClass.getInstance().init()
+    SpotLightClass.getInstance().init()
 
-    HighlightBuildingsClass.getInstance().init()
     SplineClass.getInstance().init()
-    GroundClass.getInstance().init()
+
 
     CitySceneClass.getInstance().init()
     CityClass.getInstance().init().then((model) => {
+      GroundClass.getInstance().init()
+
       FBOClass.getInstance().init({
         width: this.config.scene.width,
         height: this.config.scene.height,
@@ -137,15 +135,13 @@ class Main extends mixin(EventEmitter, Component) {
   }
 
   buildScene (model) {
-    CitySceneClass.getInstance().scene.add(DirectionalLightClass.getInstance().light)
-    CitySceneClass.getInstance().scene.add(DirectionalLightClass.getInstance().light.target)
-    CitySceneClass.getInstance().scene.add(DirectionalLightClass.getInstance().lightHelper)
-    CitySceneClass.getInstance().scene.add(DirectionalLightClass.getInstance().shadowHelper)
+    CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().light)
+    CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().light.target)
+    // CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().lightHelper)
+    // CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().shadowHelper)
 
     CitySceneClass.getInstance().scene.add(GroundClass.getInstance().mesh)
 
-    // CitySceneClass.getInstance().scene.add(HighlightBuildingsClass.getInstance().mesh)
-    // CitySceneClass.getInstance().scene.add(SplineClass.getInstance().mesh)
     CitySceneClass.getInstance().scene.add(AmbientLightClass.getInstance().light)
     CitySceneClass.getInstance().scene.add(model)
   }
