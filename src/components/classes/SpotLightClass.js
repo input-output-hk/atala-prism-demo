@@ -9,10 +9,10 @@ import DatGUIClass from './DatGUIClass'
 
 class SpotLightClass extends BaseClass {
   init () {
-    this.light = new SpotLight(0xdaebfe, 0.6)
+    this.light = new SpotLight(this.config.scene.spotLightColor, 0.6)
     this.light.position.set(160, 560, 226)
     this.light.castShadow = true
-    this.light.angle = 0.15
+    this.light.angle = 0.16
     this.light.penumbra = 0.01
     this.light.target.position.set(0, 0, 0)
     this.light.shadow.mapSize.width = 4096
@@ -33,6 +33,9 @@ class SpotLightClass extends BaseClass {
     controls.add(this.light.position, 'x').name('X Pos')
     controls.add(this.light.position, 'y').name('Y Pos')
     controls.add(this.light.position, 'z').name('Z Pos')
+    controls.addColor(this.config.scene, 'spotLightColor').name('Color').onChange((color) => {
+      this.light.color.set(color)
+    })
 
     controls.add(this.light.shadow.camera, 'near').name('Near').onChange(() => {
       this.light.shadow.camera.updateProjectionMatrix()

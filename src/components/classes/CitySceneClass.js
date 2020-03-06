@@ -3,11 +3,14 @@ import {
 } from 'three'
 
 import BaseClass from './BaseClass'
+import DatGUIClass from './DatGUIClass'
 
 class CitySceneClass extends BaseClass {
   init () {
     this.scene = new Scene()
-    // this.scene.background = this.config.scene.bgColor
+    this.scene.position.y = this.config.scene.yOffset
+    const controls = DatGUIClass.getInstance().gui.addFolder('Scene')
+    controls.add(this.scene.position, 'y')
 
     super.init()
   }

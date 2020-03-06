@@ -19,16 +19,19 @@ class Config {
   init () {
     this.data = {
       scene: {
+        yOffset: -4.7,
         fullScreen: true,
         width: window.innerWidth,
         height: window.innerHeight,
         bgColor: new Color(0x000000),
         canvasID: 'stage', // ID of webgl canvas element
+        spotLightColor: 0xdaebfe,
         ambientLightColor: 0xd8efff,
         ambientLightIntensity: 0.72
       },
       materials: {
         buildingColor: 0xdde9ff,
+        buildingHighlightColor: 0xef3b39,
         roadsColor: 0xaaaaaa,
         vehicleColor: 0xe4c2fc,
         treeColor: 0x9efe59,
@@ -44,9 +47,9 @@ class Config {
       },
       camera: {
         fov: 20,
-        initPos: { x: -265.1976211290428, y: 190, z: 302.01536118535745 },
-        near: 0.1,
-        far: 20000,
+        initPos: { x: -213.80052448436368, y: 153.17671206508584, z: 243.4827369448547 },
+        near: 100,
+        far: 1000,
         enableZoom: true // enable camera zoom on mousewheel/pinch gesture
       },
       dev: {

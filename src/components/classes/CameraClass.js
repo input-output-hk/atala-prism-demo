@@ -1,5 +1,5 @@
 import {
-  PerspectiveCamera, OrthographicCamera
+  PerspectiveCamera
 } from 'three'
 
 import BaseClass from './BaseClass'

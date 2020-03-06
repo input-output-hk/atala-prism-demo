@@ -1,6 +1,7 @@
 import {
   Color,
-  MeshStandardMaterial
+  MeshStandardMaterial,
+  MeshPhongMaterial
 } from 'three'
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
@@ -19,44 +20,42 @@ class CityClass extends BaseClass {
     this.blades = []
     this.rotation = 0
 
+    this.stepBuildings = []
+
     return new Promise((resolve, reject) => {
       let that = this
 
       this.GLTFLoader = new GLTFLoader(LoadingManagerClass.getInstance().loadingManager)
 
-      this.buildingMaterial = new MeshStandardMaterial({
+      this.buildingMaterial = new MeshPhongMaterial({
         color: this.config.materials.buildingColor,
-        roughness: 1.0,
-        metalness: 0.0,
         flatShading: true
-
       })
 
-      this.roadsMaterial = new MeshStandardMaterial({
+      this.buildingHighlightMaterial = this.buildingMaterial.clone()
+      this.buildingHighlightMaterial.color.set(this.config.materials.buildingHighlightColor)
+
+      this.roadsMaterial = new MeshPhongMaterial({
         color: this.config.materials.roadsColor,
-        roughness: 1.0,
-        metalness: 0.0,
+
         flatShading: true
       })
 
-      this.vehicleMaterial = new MeshStandardMaterial({
+      this.vehicleMaterial = new MeshPhongMaterial({
         color: this.config.materials.vehicleColor,
-        roughness: 1.0,
-        metalness: 0.0,
+
         flatShading: true
       })
 
-      this.treeMaterial = new MeshStandardMaterial({
+      this.treeMaterial = new MeshPhongMaterial({
         color: this.config.materials.treeColor,
-        roughness: 1.0,
-        metalness: 0.0,
+
         flatShading: true
       })
 
-      this.turbineMaterial = new MeshStandardMaterial({
+      this.turbineMaterial = new MeshPhongMaterial({
         color: this.config.materials.turbineColor,
-        roughness: 1.0,
-        metalness: 0.0,
+
         flatShading: true
       })
 
@@ -64,8 +63,10 @@ class CityClass extends BaseClass {
       this.controls.addColor(this.config.materials, 'buildingColor').name('Building Color').onChange((color) => {
         this.buildingMaterial.color.set(color)
       })
-      this.controls.add(this.buildingMaterial, 'roughness').name('Building Roughness')
-      this.controls.add(this.buildingMaterial, 'metalness').name('Building Metalness')
+
+      this.controls.addColor(this.config.materials, 'buildingHighlightColor').name('Building Highlight').onChange((color) => {
+        this.buildingHighlightMaterial.color.set(color)
+      })
 
       this.controls.addColor(this.config.materials, 'roadsColor').name('Road Color').onChange((color) => {
         this.roadsMaterial.color.set(color)
@@ -87,7 +88,8 @@ class CityClass extends BaseClass {
             object.receiveShadow = true
             object.castShadow = true
 
-            // console.log(object.name)
+            object.material = this.buildingMaterial
+
             switch (object.name) {
               case 'trees':
               case 'trees1':
@@ -137,16 +139,14 @@ class CityClass extends BaseClass {
                 })
 
                 break
-              // case 'panels':
-              // case 'panels1':
-              // case 'panels2':
-              // case 'panels3':
-              // case 'panels4':
-              // case 'panels5':
-              //   console.log(object)
-              //   break
-              default:
-                object.material = this.buildingMaterial
+              case 'building_med2':
+                this.stepBuildings[0] = object
+                break
+              case 'building_wide1':
+                this.stepBuildings[1] = object
+                break
+              case 'building_med':
+                this.stepBuildings[2] = object
                 break
             }
           })

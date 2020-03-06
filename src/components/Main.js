@@ -32,6 +32,7 @@ import SplineClass from './classes/SplineClass'
 import GroundClass from './classes/GroundClass'
 import CitySceneClass from './classes/CitySceneClass'
 import CityClass from './classes/CityClass'
+import IconClass from './classes/IconClass'
 import DatGUIClass from './classes/DatGUIClass'
 
 /* ------------------------------------------
@@ -114,27 +115,28 @@ class Main extends mixin(EventEmitter, Component) {
 
     SplineClass.getInstance().init()
 
-
     CitySceneClass.getInstance().init()
     CityClass.getInstance().init().then((model) => {
-      GroundClass.getInstance().init()
+      IconClass.getInstance().init().then((iconModel) => {
+        GroundClass.getInstance().init()
 
-      FBOClass.getInstance().init({
-        width: this.config.scene.width,
-        height: this.config.scene.height,
-        transparentBackground: this.config.post.transparentBackground
+        FBOClass.getInstance().init({
+          width: this.config.scene.width,
+          height: this.config.scene.height,
+          transparentBackground: this.config.post.transparentBackground
+        })
+        ControlsClass.getInstance().init()
+        MouseClass.getInstance().init()
+        TouchClass.getInstance().init()
+
+        this.buildScene(model, iconModel)
+        this.addEvents()
+        this.animate()
       })
-      ControlsClass.getInstance().init()
-      MouseClass.getInstance().init()
-      TouchClass.getInstance().init()
-
-      this.buildScene(model)
-      this.addEvents()
-      this.animate()
     })
   }
 
-  buildScene (model) {
+  buildScene (model, iconModel) {
     CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().light)
     CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().light.target)
     // CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().lightHelper)
@@ -144,6 +146,7 @@ class Main extends mixin(EventEmitter, Component) {
 
     CitySceneClass.getInstance().scene.add(AmbientLightClass.getInstance().light)
     CitySceneClass.getInstance().scene.add(model)
+    CitySceneClass.getInstance().scene.add(iconModel)
   }
 
   animate () {
@@ -160,6 +163,7 @@ class Main extends mixin(EventEmitter, Component) {
     FBOClass.getInstance().renderFrame({ dt: dt })
     SpotLightClass.getInstance().renderFrame({ dt: dt })
     CityClass.getInstance().renderFrame({ dt: dt })
+    IconClass.getInstance().renderFrame({ dt: dt })
   }
 
   addEvents () {
