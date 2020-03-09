@@ -19,7 +19,7 @@ class Config {
   init () {
     this.data = {
       scene: {
-        yOffset: -4.7,
+        yOffset: -8,
         fullScreen: true,
         width: window.innerWidth,
         height: window.innerHeight,
@@ -46,8 +46,8 @@ class Config {
         blendColor: new Color(0x000000) // 121326
       },
       camera: {
-        fov: 20,
-        initPos: { x: -213.80052448436368, y: 153.17671206508584, z: 243.4827369448547 },
+        fov: 10,
+        initPos: { x: -401.7072571143832, y: 287.80189854943706, z: 457.4768123170518 },
         near: 100,
         far: 1000,
         enableZoom: true // enable camera zoom on mousewheel/pinch gesture

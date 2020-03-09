@@ -7,8 +7,8 @@ import BaseClass from './BaseClass'
 class ControlsClass extends BaseClass {
   init () {
     this.controls = new OrbitControls(CameraClass.getInstance().camera, RendererClass.getInstance().renderer.domElement.parentNode)
-    this.controls.minDistance = 250
-    this.controls.maxDistance = 450
+    this.controls.minDistance = 350
+    this.controls.maxDistance = 700
     // this.controls.maxDistance = 1500
     this.controls.enablePan = false
     this.controls.enableZoom = this.config.camera.enableZoom

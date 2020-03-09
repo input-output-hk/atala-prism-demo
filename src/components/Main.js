@@ -33,6 +33,8 @@ import GroundClass from './classes/GroundClass'
 import CitySceneClass from './classes/CitySceneClass'
 import CityClass from './classes/CityClass'
 import IconClass from './classes/IconClass'
+import StepIconClass from './classes/StepIconClass'
+import UserIconClass from './classes/UserIconClass'
 import DatGUIClass from './classes/DatGUIClass'
 
 /* ------------------------------------------
@@ -118,25 +120,29 @@ class Main extends mixin(EventEmitter, Component) {
     CitySceneClass.getInstance().init()
     CityClass.getInstance().init().then((model) => {
       IconClass.getInstance().init().then((iconModel) => {
-        GroundClass.getInstance().init()
+        StepIconClass.getInstance().init().then((stepIconModel) => {
+          UserIconClass.getInstance().init().then((userIconModel) => {
+            GroundClass.getInstance().init()
 
-        FBOClass.getInstance().init({
-          width: this.config.scene.width,
-          height: this.config.scene.height,
-          transparentBackground: this.config.post.transparentBackground
+            FBOClass.getInstance().init({
+              width: this.config.scene.width,
+              height: this.config.scene.height,
+              transparentBackground: this.config.post.transparentBackground
+            })
+            ControlsClass.getInstance().init()
+            MouseClass.getInstance().init()
+            TouchClass.getInstance().init()
+
+            this.buildScene(model, iconModel, stepIconModel, userIconModel)
+            this.addEvents()
+            this.animate()
+          })
         })
-        ControlsClass.getInstance().init()
-        MouseClass.getInstance().init()
-        TouchClass.getInstance().init()
-
-        this.buildScene(model, iconModel)
-        this.addEvents()
-        this.animate()
       })
     })
   }
 
-  buildScene (model, iconModel) {
+  buildScene (model, iconModel, stepIconModel, userIconModel) {
     CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().light)
     CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().light.target)
     // CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().lightHelper)
@@ -147,6 +153,10 @@ class Main extends mixin(EventEmitter, Component) {
     CitySceneClass.getInstance().scene.add(AmbientLightClass.getInstance().light)
     CitySceneClass.getInstance().scene.add(model)
     CitySceneClass.getInstance().scene.add(iconModel)
+    CitySceneClass.getInstance().scene.add(stepIconModel)
+    CitySceneClass.getInstance().scene.add(userIconModel)
+
+    console.log(userIconModel)
   }
 
   animate () {
@@ -164,6 +174,8 @@ class Main extends mixin(EventEmitter, Component) {
     SpotLightClass.getInstance().renderFrame({ dt: dt })
     CityClass.getInstance().renderFrame({ dt: dt })
     IconClass.getInstance().renderFrame({ dt: dt })
+    StepIconClass.getInstance().renderFrame({ dt: dt })
+    UserIconClass.getInstance().renderFrame({ dt: dt })
   }
 
   addEvents () {

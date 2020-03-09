@@ -15,8 +15,8 @@ class SpotLightClass extends BaseClass {
     this.light.angle = 0.16
     this.light.penumbra = 0.01
     this.light.target.position.set(0, 0, 0)
-    this.light.shadow.mapSize.width = 4096
-    this.light.shadow.mapSize.height = 4096
+    this.light.shadow.mapSize.width = 2048
+    this.light.shadow.mapSize.height = 2048
     this.light.shadow.bias = 0.000001
     this.lightHelper = new SpotLightHelper(this.light)
 
