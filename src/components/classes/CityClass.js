@@ -1,6 +1,4 @@
 import {
-  Color,
-  MeshStandardMaterial,
   MeshPhongMaterial
 } from 'three'
 

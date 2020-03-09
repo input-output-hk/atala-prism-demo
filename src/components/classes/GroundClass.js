@@ -1,6 +1,6 @@
 import {
   Mesh,
-  MeshStandardMaterial,
+  MeshLambertMaterial,
   BoxBufferGeometry
 } from 'three'
 
@@ -11,10 +11,8 @@ import CityClass from './CityClass'
 class GroundClass extends BaseClass {
   init () {
     const geo = new BoxBufferGeometry(135, 1.0, 135)
-    this.material = new MeshStandardMaterial({
+    this.material = new MeshLambertMaterial({
       color: this.config.materials.groundColor,
-      roughness: 0.7,
-      metalness: 0.2,
       flatShading: true
     })
 
