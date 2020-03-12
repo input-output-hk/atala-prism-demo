@@ -16,9 +16,9 @@ class GroundClass extends BaseClass {
       flatShading: true
     })
 
-    CityClass.getInstance().controls.addColor(this.config.materials, 'groundColor').name('Ground Color').onChange((color) => {
-      this.material.color.set(color)
-    })
+    // CityClass.getInstance().controls.addColor(this.config.materials, 'groundColor').name('Ground Color').onChange((color) => {
+    //   this.material.color.set(color)
+    // })
 
     this.mesh = new Mesh(geo, this.material)
     this.mesh.receiveShadow = true

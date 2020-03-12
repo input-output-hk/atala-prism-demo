@@ -36,18 +36,18 @@ class UserIconClass extends BaseClass {
         })
       }
 
-      const icons = {
+      this.icons = {
         'user': {
           url: imageUser,
           position: new Vector3(26, 17, 55.2)
         }
       }
 
-      const promises = Object.keys(icons).map(key => {
-        return loadImage(icons[key].url).then(texture => {
+      const promises = Object.keys(this.icons).map(key => {
+        return loadImage(this.icons[key].url).then(texture => {
           texture.flipY = false
           texture.anisotropy = RendererClass.getInstance().renderer.getMaxAnisotropy()
-          icons[key].texture = texture
+          this.icons[key].texture = texture
         })
       })
 
@@ -62,20 +62,20 @@ class UserIconClass extends BaseClass {
             mesh.rotateZ(Math.PI)
             mesh.scale.set(0.9, 0.6, 0.9)
 
-            for (const key in icons) {
+            for (const key in this.icons) {
               const iconMesh = mesh.clone()
               iconMesh.material = this.material.clone()
 
-              iconMesh.material.map = icons[key].texture
+              iconMesh.material.map = this.icons[key].texture
 
-              iconMesh.position.x = icons[key].position.x
-              iconMesh.position.y = icons[key].position.y
-              iconMesh.position.z = icons[key].position.z
+              iconMesh.position.x = this.icons[key].position.x
+              iconMesh.position.y = this.icons[key].position.y
+              iconMesh.position.z = this.icons[key].position.z
 
-              const controls = DatGUIClass.getInstance().gui.addFolder(key + ' Position')
-              controls.add(iconMesh.position, 'x').name('x')
-              controls.add(iconMesh.position, 'y').name('y')
-              controls.add(iconMesh.position, 'z').name('z')
+              // const controls = DatGUIClass.getInstance().gui.addFolder(key + ' Position')
+              // controls.add(iconMesh.position, 'x').name('x')
+              // controls.add(iconMesh.position, 'y').name('y')
+              // controls.add(iconMesh.position, 'z').name('z')
 
               group.add(iconMesh)
             }

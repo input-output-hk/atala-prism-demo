@@ -1,46 +1,108 @@
 import {
   BufferGeometry,
-  LineBasicMaterial,
   Line,
-  Vector2,
-  SplineCurve,
+  CubicBezierCurve3,
+  LineDashedMaterial,
   Group
 } from 'three'
 
+import { gsap } from 'gsap'
+
 // classes
 import BaseClass from './BaseClass'
+import StepIconClass from './StepIconClass'
+import UserIconClass from './UserIconClass'
+import CityClass from './CityClass'
+
+import StepClass from './StepClass'
 
 class SplineClass extends BaseClass {
-  init () {
-    let range = 1.2
+  init (step = 0) {
+    this.pointCount = 50
+    this.geometries = []
+
+    this.material = new LineDashedMaterial({
+      color: 0xff0000,
+      dashSize: 1,
+      gapSize: 0.8
+    })
 
     this.mesh = new Group()
 
-    for (let index = 0; index < 20; index++) {
-      // Create a sine-like wave
-      var curve = new SplineCurve([
-        new Vector2(-20.0625, 10.4714).addScalar(Math.random() * range - (range / 2)),
-        new Vector2(-20.4737, 7.33255).addScalar(Math.random() * range - (range / 2)),
-        new Vector2(-5.15353, 6.95135).addScalar(Math.random() * range - (range / 2)),
-        new Vector2(16.141, 7.34971).addScalar(Math.random() * range - (range / 2)),
-        new Vector2(17.1487, 0.28534).addScalar(Math.random() * range - (range / 2)),
-        new Vector2(17.0351, -12.1843).addScalar(Math.random() * range - (range / 2)),
-        new Vector2(12.0034, -12.2996).addScalar(Math.random() * range - (range / 2))
-      ])
+    for (let index = 0; index < StepClass.getInstance().steps; index++) {
+      let start
+      if (index === 0) {
+        start = UserIconClass.getInstance().icons['user'].position
+      } else {
+        start = StepIconClass.getInstance().icons[this.config.steps[index - 1]].position
+      }
 
-      var points = curve.getPoints(50)
-      var geometry = new BufferGeometry().setFromPoints(points)
+      const end = StepIconClass.getInstance().icons[this.config.steps[index]].position
 
-      var material = new LineBasicMaterial({ color: 0xff0000, opacity: 0.3, transparent: true })
+      const midYAmount = 70
 
-      // Create the final object to add to the scene
-      const mesh = new Line(geometry, material)
-      mesh.rotateY(-Math.PI)
-      mesh.rotateX(Math.PI / 2)
-      mesh.translateZ(-1.5 * (Math.random() * 1.2))
+      const mid1 = start.clone()
+      mid1.y = midYAmount
 
-      this.mesh.add(mesh)
+      const mid2 = end.clone()
+      mid2.y = midYAmount
+
+      const curve = new CubicBezierCurve3(
+        start,
+        mid1,
+        mid2,
+        end
+      )
+
+      const points = curve.getPoints(this.pointCount)
+      this.geometries[index] = new BufferGeometry().setFromPoints(points)
+      this.geometries[index].setDrawRange(0, 0)
+
+      const line = new Line(this.geometries[index], this.material)
+      line.computeLineDistances()
+
+      this.mesh.add(line)
     }
+
+    StepClass.getInstance().on('setStep', (data) => {
+      this.setStep(data.step)
+    })
+  }
+
+  setStep (step) {
+    const tl = gsap.timeline()
+
+    for (let index = 0; index < step; index++) {
+      if (this.geometries[index].drawRange.count >= this.pointCount) {
+        continue
+      }
+
+      let params = {
+        drawRange: 0
+      }
+
+      for (let stepIndex = 1; stepIndex <= StepClass.getInstance().steps; stepIndex++) {
+        CityClass.getInstance().stepBuildings[stepIndex - 1].material = CityClass.getInstance().buildingMaterial.clone()
+      }
+      tl.to(params, {
+        drawRange: 50,
+        duration: 2,
+        ease: 'none',
+        onUpdate: function () {
+          this.geometries[index].setDrawRange(0, params.drawRange)
+        }.bind(this),
+        onComplete: function () {
+          if (step === index + 1) {
+            CityClass.getInstance().stepBuildings[index].material = CityClass.getInstance().buildingHighlightMaterial.clone()
+          }
+        }
+      }
+      )
+    }
+  }
+
+  renderFrame ({ dt } = {}) {
+
   }
 }
 

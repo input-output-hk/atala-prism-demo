@@ -9,8 +9,8 @@ class CitySceneClass extends BaseClass {
   init () {
     this.scene = new Scene()
     this.scene.position.y = this.config.scene.yOffset
-    const controls = DatGUIClass.getInstance().gui.addFolder('Scene')
-    controls.add(this.scene.position, 'y')
+    // const controls = DatGUIClass.getInstance().gui.addFolder('Scene')
+    // controls.add(this.scene.position, 'y')
 
     super.init()
   }

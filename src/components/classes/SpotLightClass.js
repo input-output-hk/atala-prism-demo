@@ -26,26 +26,26 @@ class SpotLightClass extends BaseClass {
     this.shadowHelper = new CameraHelper(this.light.shadow.camera)
 
     // controls
-    const controls = DatGUIClass.getInstance().gui.addFolder('Spot Light Controls')
-    controls.add(this.light, 'angle').name('Angle')
-    controls.add(this.light, 'intensity').name('Intensity')
-    controls.add(this.light.position, 'z').name('Z Pos')
-    controls.add(this.light.position, 'x').name('X Pos')
-    controls.add(this.light.position, 'y').name('Y Pos')
-    controls.add(this.light.position, 'z').name('Z Pos')
-    controls.addColor(this.config.scene, 'spotLightColor').name('Color').onChange((color) => {
-      this.light.color.set(color)
-    })
+    // const controls = DatGUIClass.getInstance().gui.addFolder('Spot Light Controls')
+    // controls.add(this.light, 'angle').name('Angle')
+    // controls.add(this.light, 'intensity').name('Intensity')
+    // controls.add(this.light.position, 'z').name('Z Pos')
+    // controls.add(this.light.position, 'x').name('X Pos')
+    // controls.add(this.light.position, 'y').name('Y Pos')
+    // controls.add(this.light.position, 'z').name('Z Pos')
+    // controls.addColor(this.config.scene, 'spotLightColor').name('Color').onChange((color) => {
+    //   this.light.color.set(color)
+    // })
 
-    controls.add(this.light.shadow.camera, 'near').name('Near').onChange(() => {
-      this.light.shadow.camera.updateProjectionMatrix()
-    })
-    controls.add(this.light.shadow.camera, 'far').name('Far').onChange(() => {
-      this.light.shadow.camera.updateProjectionMatrix()
-    })
-    controls.add(this.light.shadow.camera, 'fov').name('fov').onChange(() => {
-      this.light.shadow.camera.updateProjectionMatrix()
-    })
+    // controls.add(this.light.shadow.camera, 'near').name('Near').onChange(() => {
+    //   this.light.shadow.camera.updateProjectionMatrix()
+    // })
+    // controls.add(this.light.shadow.camera, 'far').name('Far').onChange(() => {
+    //   this.light.shadow.camera.updateProjectionMatrix()
+    // })
+    // controls.add(this.light.shadow.camera, 'fov').name('fov').onChange(() => {
+    //   this.light.shadow.camera.updateProjectionMatrix()
+    // })
 
     super.init()
   }

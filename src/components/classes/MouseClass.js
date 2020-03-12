@@ -9,6 +9,7 @@ import RendererClass from './RendererClass'
 
 class MouseClass extends BaseClass {
   init () {
+    this.ndc = new Vector2(0, 0)
     this.prevMousePos = new Vector2(0, 0)
     this.mouseDelta = new Vector2(0, 0)
     this.movement = new Vector2()
@@ -37,6 +38,9 @@ class MouseClass extends BaseClass {
 
     this.normalizedMousePos.x = x / RendererClass.getInstance().renderer.domElement.width
     this.normalizedMousePos.y = 1 - y / RendererClass.getInstance().renderer.domElement.height
+
+    this.ndc.x = (2 * this.normalizedMousePos.x) - 1
+    this.ndc.y = (2 * this.normalizedMousePos.y) - 1
 
     super.onMouseMove()
   }

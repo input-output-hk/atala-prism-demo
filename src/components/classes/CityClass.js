@@ -35,7 +35,6 @@ class CityClass extends BaseClass {
 
       this.roadsMaterial = new MeshPhongMaterial({
         color: this.config.materials.roadsColor,
-
         flatShading: true
       })
 
@@ -53,31 +52,30 @@ class CityClass extends BaseClass {
 
       this.turbineMaterial = new MeshPhongMaterial({
         color: this.config.materials.turbineColor,
-
         flatShading: true
       })
 
-      this.controls = DatGUIClass.getInstance().gui.addFolder('Materials')
-      this.controls.addColor(this.config.materials, 'buildingColor').name('Building Color').onChange((color) => {
-        this.buildingMaterial.color.set(color)
-      })
+      // this.controls = DatGUIClass.getInstance().gui.addFolder('Materials')
+      // this.controls.addColor(this.config.materials, 'buildingColor').name('Building Color').onChange((color) => {
+      //   this.buildingMaterial.color.set(color)
+      // })
 
-      this.controls.addColor(this.config.materials, 'buildingHighlightColor').name('Building Highlight').onChange((color) => {
-        this.buildingHighlightMaterial.color.set(color)
-      })
+      // this.controls.addColor(this.config.materials, 'buildingHighlightColor').name('Building Highlight').onChange((color) => {
+      //   this.buildingHighlightMaterial.color.set(color)
+      // })
 
-      this.controls.addColor(this.config.materials, 'roadsColor').name('Road Color').onChange((color) => {
-        this.roadsMaterial.color.set(color)
-      })
-      this.controls.addColor(this.config.materials, 'vehicleColor').name('Vehicle Color').onChange((color) => {
-        this.vehicleMaterial.color.set(color)
-      })
-      this.controls.addColor(this.config.materials, 'treeColor').name('Tree Color').onChange((color) => {
-        this.treeMaterial.color.set(color)
-      })
-      this.controls.addColor(this.config.materials, 'turbineColor').name('Turbine Color').onChange((color) => {
-        this.turbineMaterial.color.set(color)
-      })
+      // this.controls.addColor(this.config.materials, 'roadsColor').name('Road Color').onChange((color) => {
+      //   this.roadsMaterial.color.set(color)
+      // })
+      // this.controls.addColor(this.config.materials, 'vehicleColor').name('Vehicle Color').onChange((color) => {
+      //   this.vehicleMaterial.color.set(color)
+      // })
+      // this.controls.addColor(this.config.materials, 'treeColor').name('Tree Color').onChange((color) => {
+      //   this.treeMaterial.color.set(color)
+      // })
+      // this.controls.addColor(this.config.materials, 'turbineColor').name('Turbine Color').onChange((color) => {
+      //   this.turbineMaterial.color.set(color)
+      // })
 
       this.GLTFLoader.load(
         model,
@@ -145,6 +143,9 @@ class CityClass extends BaseClass {
                 break
               case 'building_med':
                 this.stepBuildings[2] = object
+                break
+              case 'building_med6':
+                this.stepBuildings[3] = object
                 break
             }
           })

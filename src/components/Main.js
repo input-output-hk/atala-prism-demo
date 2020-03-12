@@ -3,8 +3,7 @@
 ------------------------------------------ */
 import React, { Component } from 'react'
 import {
-  Clock,
-  Vector2
+  Clock
 } from 'three'
 
 import EventEmitter from 'eventemitter3'
@@ -36,6 +35,7 @@ import IconClass from './classes/IconClass'
 import StepIconClass from './classes/StepIconClass'
 import UserIconClass from './classes/UserIconClass'
 import DatGUIClass from './classes/DatGUIClass'
+import StepClass from './classes/StepClass'
 
 /* ------------------------------------------
 Styles
@@ -54,11 +54,9 @@ class Main extends mixin(EventEmitter, Component) {
 
     this.initLoader()
 
+    this.itemsToLoad = 25 // TODO: this better
+
     this.state = {
-      tooltipPos: new Vector2(),
-      tooltipCountry: null,
-      tooltipCity: null,
-      tooltipHide: true,
       loaded: false,
       itemsLoaded: 0,
       itemsTotal: 0
@@ -72,19 +70,25 @@ class Main extends mixin(EventEmitter, Component) {
       // console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.')
     }
 
-    LoadingManagerClass.getInstance().loadingManager.onLoad = function () {
-      this.setState({
-        loaded: true
-      })
+    // LoadingManagerClass.getInstance().loadingManager.onLoad = function () {
+    // this.setState({
+    //   loaded: true
+    // })
 
-      // console.log('Loading complete!')
-    }.bind(this)
+    // console.log('Loading complete!')
+    // }.bind(this)
 
     LoadingManagerClass.getInstance().loadingManager.onProgress = function (url, itemsLoaded, itemsTotal) {
       this.setState({
         itemsTotal: itemsTotal,
         itemsLoaded: itemsLoaded
       })
+
+      if (itemsLoaded === this.itemsToLoad) {
+        this.setState({
+          loaded: true
+        })
+      }
 
       // console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.')
     }.bind(this)
@@ -99,29 +103,29 @@ class Main extends mixin(EventEmitter, Component) {
   }
 
   setConfigFromURLParams () {
-    // const blendColor = parseInt(getUrlParameter('blendColor'))
-    // if (!isNaN(blendColor)) {
-    //   this.config.post.blendColor = new Color(blendColor)
-    // }
+    const step = parseInt(getUrlParameter('step'))
+    if (!isNaN(step)) {
+      this.step = step
+    }
   }
 
   initStage () {
     this.setConfigFromURLParams()
 
     DatGUIClass.getInstance().init()
+    StepClass.getInstance().init()
 
     CameraClass.getInstance().init()
     RendererClass.getInstance().init()
     AmbientLightClass.getInstance().init()
     SpotLightClass.getInstance().init()
 
-    SplineClass.getInstance().init()
-
     CitySceneClass.getInstance().init()
     CityClass.getInstance().init().then((model) => {
       IconClass.getInstance().init().then((iconModel) => {
         StepIconClass.getInstance().init().then((stepIconModel) => {
           UserIconClass.getInstance().init().then((userIconModel) => {
+            SplineClass.getInstance().init(this.step)
             GroundClass.getInstance().init()
 
             FBOClass.getInstance().init({
@@ -149,14 +153,13 @@ class Main extends mixin(EventEmitter, Component) {
     // CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().shadowHelper)
 
     CitySceneClass.getInstance().scene.add(GroundClass.getInstance().mesh)
-
     CitySceneClass.getInstance().scene.add(AmbientLightClass.getInstance().light)
     CitySceneClass.getInstance().scene.add(model)
     CitySceneClass.getInstance().scene.add(iconModel)
     CitySceneClass.getInstance().scene.add(stepIconModel)
     CitySceneClass.getInstance().scene.add(userIconModel)
 
-    console.log(userIconModel)
+    CitySceneClass.getInstance().scene.add(SplineClass.getInstance().mesh)
   }
 
   animate () {
@@ -168,6 +171,7 @@ class Main extends mixin(EventEmitter, Component) {
     const dt = this.clock.getDelta()
 
     MouseClass.getInstance().renderFrame({ dt: dt })
+    CameraClass.getInstance().renderFrame({ dt: dt })
     TouchClass.getInstance().renderFrame({ dt: dt })
     ControlsClass.getInstance().renderFrame({ dt: dt })
     FBOClass.getInstance().renderFrame({ dt: dt })
@@ -176,6 +180,7 @@ class Main extends mixin(EventEmitter, Component) {
     IconClass.getInstance().renderFrame({ dt: dt })
     StepIconClass.getInstance().renderFrame({ dt: dt })
     UserIconClass.getInstance().renderFrame({ dt: dt })
+    SplineClass.getInstance().renderFrame({ dt: dt })
   }
 
   addEvents () {

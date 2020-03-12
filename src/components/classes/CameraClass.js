@@ -1,5 +1,6 @@
 import {
-  PerspectiveCamera
+  PerspectiveCamera,
+  Vector3
 } from 'three'
 
 import BaseClass from './BaseClass'
@@ -12,10 +13,17 @@ class CameraClass extends BaseClass {
       this.config.camera.near,
       this.config.camera.far
     )
-    this.camera.position.x = this.config.camera.initPos.x
-    this.camera.position.y = this.config.camera.initPos.y
-    this.camera.position.z = this.config.camera.initPos.z
 
+    this.cameraInitPos = new Vector3()
+    this.cameraInitPos.x = 0
+    this.cameraInitPos.y = 500
+    this.cameraInitPos.z = 300
+
+    this.camera.position.x = this.config.camera.stepPos[0].x
+    this.camera.position.y = this.config.camera.stepPos[0].y
+    this.camera.position.z = this.config.camera.stepPos[0].z
+
+    this.camera.lookAt(new Vector3(0, 0, 0))
     this.camera.updateMatrixWorld()
 
     window.camera = this.camera
@@ -26,6 +34,10 @@ class CameraClass extends BaseClass {
 
     this.camera.updateProjectionMatrix()
     super.resize()
+  }
+
+  renderFrame ({ dt } = {}) {
+
   }
 }
 

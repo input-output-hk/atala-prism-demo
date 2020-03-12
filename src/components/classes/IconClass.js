@@ -49,7 +49,7 @@ class IconClass extends BaseClass {
         })
       }
 
-      const icons = {
+      this.icons = {
         '5gTall': {
           url: image5g,
           position: new Vector3(-6, 57, -21)
@@ -100,14 +100,14 @@ class IconClass extends BaseClass {
         }
       }
 
-      const promises = Object.keys(icons).map(key => {
-        return loadImage(icons[key].url).then(texture => {
+      const promises = Object.keys(this.icons).map(key => {
+        return loadImage(this.icons[key].url).then(texture => {
           texture.flipY = false
           texture.anisotropy = RendererClass.getInstance().renderer.getMaxAnisotropy()
           texture.wrapS = MirroredRepeatWrapping
           texture.repeat.set(2, 2)
           texture.offset.y = -1
-          icons[key].texture = texture
+          this.icons[key].texture = texture
         })
       })
 
@@ -123,20 +123,20 @@ class IconClass extends BaseClass {
             mesh.rotateZ(Math.PI / 2)
             mesh.scale.set(2.1, 0.8, 2.1)
 
-            for (const key in icons) {
+            for (const key in this.icons) {
               mesh.material = this.material.clone()
               const iconMesh = mesh.clone()
 
-              iconMesh.material.map = icons[key].texture
+              iconMesh.material.map = this.icons[key].texture
 
-              iconMesh.position.x = icons[key].position.x
-              iconMesh.position.y = icons[key].position.y
-              iconMesh.position.z = icons[key].position.z
+              iconMesh.position.x = this.icons[key].position.x
+              iconMesh.position.y = this.icons[key].position.y
+              iconMesh.position.z = this.icons[key].position.z
 
-              const controls = DatGUIClass.getInstance().gui.addFolder(key + ' Position')
-              controls.add(iconMesh.position, 'x').name('x')
-              controls.add(iconMesh.position, 'y').name('y')
-              controls.add(iconMesh.position, 'z').name('z')
+              // const controls = DatGUIClass.getInstance().gui.addFolder(key + ' Position')
+              // controls.add(iconMesh.position, 'x').name('x')
+              // controls.add(iconMesh.position, 'y').name('y')
+              // controls.add(iconMesh.position, 'z').name('z')
 
               group.add(iconMesh)
             }

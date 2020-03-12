@@ -6,7 +6,7 @@ import BaseClass from './BaseClass'
 class DatGUIClass extends BaseClass {
   init () {
     this.gui = new dat.GUI({ width: 300 })
-    this.gui.close()
+    // this.gui.close()
 
     super.init()
   }

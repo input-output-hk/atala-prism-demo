@@ -38,6 +38,12 @@ class Config {
         turbineColor: 0xffffff,
         groundColor: 0xc1deb8
       },
+      steps: {
+        0: 'gov',
+        1: 'uni',
+        2: 'job',
+        3: 'insurance'
+      },
       post: {
         enabled: false,
         vignette: true,
@@ -47,7 +53,13 @@ class Config {
       },
       camera: {
         fov: 10,
-        initPos: { x: -401.7072571143832, y: 287.80189854943706, z: 457.4768123170518 },
+        stepPos: {
+          0: { x: -402, y: 288, z: 456 },
+          1: { x: 0, y: 300, z: 200 },
+          2: { x: -402, y: 288, z: 456 },
+          3: { x: -402, y: 288, z: 456 }
+        },
+
         near: 100,
         far: 1000,
         enableZoom: true // enable camera zoom on mousewheel/pinch gesture
