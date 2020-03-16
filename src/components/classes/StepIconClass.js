@@ -12,6 +12,7 @@ import BaseClass from './BaseClass'
 import LoadingManagerClass from './LoadingManagerClass'
 import RendererClass from './RendererClass'
 import DatGUIClass from './DatGUIClass'
+import RayCasterClass from './RayCasterClass'
 
 // models
 import model from '../../assets/models/step-icon.glb'
@@ -42,19 +43,23 @@ class StepIconClass extends BaseClass {
       this.icons = {
         'gov': {
           url: imageGov,
-          position: new Vector3(-18, 24.5, -6)
+          position: new Vector3(-18, 24.5, -6),
+          description: this.config.icons['gov'].description
         },
         'uni': {
           url: imageUni,
-          position: new Vector3(37, 13, 4.6)
+          position: new Vector3(37, 13, 4.6),
+          description: this.config.icons['uni'].description
         },
         'job': {
           url: imageJob,
-          position: new Vector3(-20, 45, -18.5)
+          position: new Vector3(-20, 45, -18.5),
+          description: this.config.icons['job'].description
         },
         'insurance': {
           url: imageInsurance,
-          position: new Vector3(-39, 31, -33)
+          position: new Vector3(-39, 31, -33),
+          description: this.config.icons['insurance'].description
         }
       }
 
@@ -74,13 +79,14 @@ class StepIconClass extends BaseClass {
           function (gltf) {
             const mesh = gltf.scene.children[0]
 
-            // mesh.rotateX(Math.PI / 2)
             mesh.rotateZ(Math.PI)
             mesh.scale.set(0.8, 0.5, 0.8)
 
             for (const key in this.icons) {
               const iconMesh = mesh.clone()
               iconMesh.material = this.material.clone()
+
+              iconMesh.description = this.icons[key].description[this.config.language]
 
               iconMesh.material.map = this.icons[key].texture
 
@@ -92,6 +98,8 @@ class StepIconClass extends BaseClass {
               // controls.add(iconMesh.position, 'x').name('x')
               // controls.add(iconMesh.position, 'y').name('y')
               // controls.add(iconMesh.position, 'z').name('z')
+
+              RayCasterClass.getInstance().intersects.push(iconMesh) // test mouse ray intersection on these objects
 
               group.add(iconMesh)
             }

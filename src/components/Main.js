@@ -36,6 +36,7 @@ import StepIconClass from './classes/StepIconClass'
 import UserIconClass from './classes/UserIconClass'
 import DatGUIClass from './classes/DatGUIClass'
 import StepClass from './classes/StepClass'
+import RayCasterClass from './classes/RayCasterClass'
 
 /* ------------------------------------------
 Styles
@@ -48,9 +49,6 @@ class Main extends mixin(EventEmitter, Component) {
 
     this.config = new Config().data
     this.clock = new Clock()
-    this.modifiedQueue = []
-    this.processingQueue = false
-    this.data = []
 
     this.initLoader()
 
@@ -61,6 +59,10 @@ class Main extends mixin(EventEmitter, Component) {
       itemsLoaded: 0,
       itemsTotal: 0
     }
+
+    this.root = document.getElementById(this.config.rootCanvasID)
+
+    window.atalaPrismDemo = this
   }
 
   initLoader () {
@@ -117,6 +119,7 @@ class Main extends mixin(EventEmitter, Component) {
 
     CameraClass.getInstance().init()
     RendererClass.getInstance().init()
+    RayCasterClass.getInstance().init()
     AmbientLightClass.getInstance().init()
     SpotLightClass.getInstance().init()
 
@@ -137,8 +140,8 @@ class Main extends mixin(EventEmitter, Component) {
             MouseClass.getInstance().init()
             TouchClass.getInstance().init()
 
-            this.buildScene(model, iconModel, stepIconModel, userIconModel)
             this.addEvents()
+            this.buildScene(model, iconModel, stepIconModel, userIconModel)
             this.animate()
           })
         })
@@ -171,8 +174,8 @@ class Main extends mixin(EventEmitter, Component) {
     const dt = this.clock.getDelta()
 
     MouseClass.getInstance().renderFrame({ dt: dt })
-    CameraClass.getInstance().renderFrame({ dt: dt })
     TouchClass.getInstance().renderFrame({ dt: dt })
+    CameraClass.getInstance().renderFrame({ dt: dt })
     ControlsClass.getInstance().renderFrame({ dt: dt })
     FBOClass.getInstance().renderFrame({ dt: dt })
     SpotLightClass.getInstance().renderFrame({ dt: dt })
@@ -181,19 +184,29 @@ class Main extends mixin(EventEmitter, Component) {
     StepIconClass.getInstance().renderFrame({ dt: dt })
     UserIconClass.getInstance().renderFrame({ dt: dt })
     SplineClass.getInstance().renderFrame({ dt: dt })
+    RayCasterClass.getInstance().renderFrame({ dt: dt })
   }
 
   addEvents () {
     window.addEventListener('resize', this.resize.bind(this), false)
     this.resize()
 
-    RendererClass.getInstance().renderer.domElement.addEventListener('mousemove', (e) => {
+    this.root.addEventListener('mousemove', (e) => {
       MouseClass.getInstance().onMouseMove(e)
     }, false)
 
-    RendererClass.getInstance().renderer.domElement.addEventListener('touchmove', (e) => {
+    this.root.addEventListener('mousedown', (e) => {
+      e.preventDefault()
+      RayCasterClass.getInstance().onMouseDown(e)
+    }, false)
+
+    this.root.addEventListener('touchmove', (e) => {
       TouchClass.getInstance().onTouchMove(e)
     }, false)
+
+    RayCasterClass.getInstance().on('iconClick', (data) => {
+      this.emit('iconClick', data)
+    })
   }
 
   resize () {
@@ -244,7 +257,7 @@ class Main extends mixin(EventEmitter, Component) {
     return (
       <div className={styles.container}>
         <this.preloader loaded={this.state.loaded} itemsTotal={this.state.itemsTotal} itemsLoaded={this.state.itemsLoaded} />
-        <canvas width={this.width} height={this.height} id={this.config.scene.canvasID} />
+        <canvas id={this.config.scene.canvasID} />
       </div>
     )
   }

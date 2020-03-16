@@ -13,7 +13,9 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import BaseClass from './BaseClass'
 import LoadingManagerClass from './LoadingManagerClass'
 import RendererClass from './RendererClass'
-import DatGUIClass from './DatGUIClass'
+import RayCasterClass from './RayCasterClass'
+
+// import DatGUIClass from './DatGUIClass'
 
 // models
 import model from '../../assets/models/icon.glb'
@@ -32,6 +34,8 @@ import imageCloud from '../../assets/textures/cloud.png'
 
 class IconClass extends BaseClass {
   init () {
+    this.group = new Group()
+
     return new Promise((resolve, reject) => {
       this.GLTFLoader = new GLTFLoader(LoadingManagerClass.getInstance().loadingManager)
       this.imageLoader = new TextureLoader(LoadingManagerClass.getInstance().loadingManager)
@@ -52,51 +56,63 @@ class IconClass extends BaseClass {
       this.icons = {
         '5gTall': {
           url: image5g,
-          position: new Vector3(-6, 57, -21)
+          position: new Vector3(-6, 57, -21),
+          description: this.config.icons['5G'].description
         },
         '5gShort': {
           url: image5g,
-          position: new Vector3(11, 29, 8)
+          position: new Vector3(11, 29, 8),
+          description: this.config.icons['5G'].description
         },
         'wifi1': {
           url: imageWifi,
-          position: new Vector3(-37.7, 19, -6)
+          position: new Vector3(-37.7, 19, -6),
+          description: this.config.icons['wifi'].description
         },
         'wifi2': {
           url: imageWifi,
-          position: new Vector3(-37.7, 19, 8.5)
+          position: new Vector3(-37.7, 19, 8.5),
+          description: this.config.icons['wifi'].description
         },
         'garden': {
           url: imageGarden,
-          position: new Vector3(-38.5, 24, -19.1)
+          position: new Vector3(-38.5, 24, -19.1),
+          description: this.config.icons['garden'].description
         },
         'mobile': {
           url: imageMobile,
-          position: new Vector3(-35, 4, 34)
+          position: new Vector3(-35, 4, 34),
+          description: this.config.icons['mobile'].description
         },
         'solar': {
           url: imageSolar,
-          position: new Vector3(-44, 4, 53)
+          position: new Vector3(-44, 4, 53),
+          description: this.config.icons['solar'].description
         },
         'wind': {
           url: imageWind,
-          position: new Vector3(-15, 13, 56)
+          position: new Vector3(-15, 13, 56),
+          description: this.config.icons['wind'].description
         },
         'traffic': {
           url: imageTraffic,
-          position: new Vector3(16, 4, 21)
+          position: new Vector3(16, 4, 21),
+          description: this.config.icons['traffic'].description
         },
         'car': {
           url: imageCar,
-          position: new Vector3(-30, 4, 18)
+          position: new Vector3(-30, 4, 18),
+          description: this.config.icons['car'].description
         },
         'bike': {
           url: imageBike,
-          position: new Vector3(18, 4, 57)
+          position: new Vector3(18, 4, 57),
+          description: this.config.icons['bike'].description
         },
         'cloud': {
           url: imageCloud,
-          position: new Vector3(12, 45.5, -7)
+          position: new Vector3(12, 45.5, -7),
+          description: this.config.icons['cloud'].description
         }
       }
 
@@ -110,8 +126,6 @@ class IconClass extends BaseClass {
           this.icons[key].texture = texture
         })
       })
-
-      const group = new Group()
 
       Promise.all(promises).then(() => {
         this.GLTFLoader.load(
@@ -127,6 +141,8 @@ class IconClass extends BaseClass {
               mesh.material = this.material.clone()
               const iconMesh = mesh.clone()
 
+              iconMesh.description = this.icons[key].description[this.config.language]
+
               iconMesh.material.map = this.icons[key].texture
 
               iconMesh.position.x = this.icons[key].position.x
@@ -138,10 +154,12 @@ class IconClass extends BaseClass {
               // controls.add(iconMesh.position, 'y').name('y')
               // controls.add(iconMesh.position, 'z').name('z')
 
-              group.add(iconMesh)
+              RayCasterClass.getInstance().intersects.push(iconMesh) // test mouse ray intersection on these objects
+
+              this.group.add(iconMesh)
             }
 
-            resolve(group)
+            resolve(this.group)
           }.bind(this)
         )
       })

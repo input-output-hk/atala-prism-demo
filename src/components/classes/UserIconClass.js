@@ -12,6 +12,7 @@ import BaseClass from './BaseClass'
 import LoadingManagerClass from './LoadingManagerClass'
 import RendererClass from './RendererClass'
 import DatGUIClass from './DatGUIClass'
+import RayCasterClass from './RayCasterClass'
 
 // models
 import model from '../../assets/models/user-icon.glb'
@@ -76,6 +77,8 @@ class UserIconClass extends BaseClass {
               // controls.add(iconMesh.position, 'x').name('x')
               // controls.add(iconMesh.position, 'y').name('y')
               // controls.add(iconMesh.position, 'z').name('z')
+
+              // RayCasterClass.getInstance().intersects.push(iconMesh) // test mouse ray intersection on these objects
 
               group.add(iconMesh)
             }

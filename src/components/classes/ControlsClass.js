@@ -22,17 +22,27 @@ class ControlsClass extends BaseClass {
     this.controls.minPolarAngle = 1
     this.controls.maxAzimuthAngle = -0.5
     this.controls.minAzimuthAngle = -1.0
-    super.init()
+
+    this.movementPaused = false
   }
 
   destroy () {
     this.controls.dispose()
-    super.destroy()
+    this.controls = null
   }
 
   renderFrame () {
-    this.controls.update(MouseClass.getInstance().mousePos)
-    super.renderFrame()
+    if (this.movementPaused) {
+      return
+    }
+
+    if (this.controls) {
+      if (CameraClass.getInstance().isAnimating) {
+        this.controls.update()
+      } else {
+        this.controls.update(MouseClass.getInstance().mousePos)
+      }
+    }
   }
 }
 
