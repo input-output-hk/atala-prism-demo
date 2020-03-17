@@ -26,7 +26,11 @@ class StepClass extends BaseClass {
     this.setStep()
   }
 
-  setStep () {
+  setStep (step) {
+    if (step) {
+      this.step = step
+    }
+
     if (this.step > this.steps) {
       this.step = this.steps
     }

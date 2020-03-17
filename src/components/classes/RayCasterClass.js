@@ -37,6 +37,10 @@ class RayCasterClass extends BaseClass {
   }
 
   renderFrame ({ dt } = {}) {
+    if (CameraClass.getInstance().isAnimating) {
+      return
+    }
+
     this.hovered = null
 
     this.raycaster.setFromCamera(MouseClass.getInstance().ndc, CameraClass.getInstance().camera)
@@ -59,7 +63,6 @@ class RayCasterClass extends BaseClass {
 
         document.body.style.cursor = 'default'
 
-        console.log('mouseout')
         this.emit('iconMouseOut', {})
 
         this.mouseOver = false

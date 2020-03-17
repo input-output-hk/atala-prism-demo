@@ -114,6 +114,15 @@ class Main extends mixin(EventEmitter, Component) {
     }
   }
 
+  initAPIMethods () {
+    this.incrementStep = () => {
+      StepClass.getInstance().incrementStep()
+    }
+    this.setStep = (step) => {
+      StepClass.getInstance().setStep(step)
+    }
+  }
+
   initStage () {
     this.setConfigFromURLParams()
 
@@ -145,6 +154,9 @@ class Main extends mixin(EventEmitter, Component) {
 
             this.addEvents()
             this.buildScene(model, iconModel, stepIconModel, userIconModel)
+
+            this.initAPIMethods()
+
             this.animate()
           })
         })
