@@ -66,3 +66,13 @@
     background: #333;
     transition: width 0.3s ease-in-out;
 }
+
+.infoBox {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    background: rgba(255,255,255, 0.8);
+    padding: 10px;
+    font-size: 12px;
+}

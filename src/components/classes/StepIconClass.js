@@ -25,6 +25,8 @@ import imageInsurance from '../../assets/textures/insurance.png'
 
 class StepIconClass extends BaseClass {
   init () {
+    this.hoverColor = 0xffc4c4
+
     return new Promise((resolve, reject) => {
       this.GLTFLoader = new GLTFLoader(LoadingManagerClass.getInstance().loadingManager)
       this.imageLoader = new TextureLoader(LoadingManagerClass.getInstance().loadingManager)
@@ -87,6 +89,8 @@ class StepIconClass extends BaseClass {
               iconMesh.material = this.material.clone()
 
               iconMesh.description = this.icons[key].description[this.config.language]
+
+              iconMesh.hoverColor = this.hoverColor
 
               iconMesh.material.map = this.icons[key].texture
 

@@ -32,13 +32,26 @@
         position: absolute;  
       }
 
-      .root {
+      .atala-prism-demo-root {
         height: 100%;
+        width: 100%;
         /* position: relative; */
       }
     </style>
   </head>
   <body>
-    <div id="root"></div>
-  <script type="text/javascript" src="index.bundle.js?v=37373737"></script></body>
+    <div id="atala-prism-demo-root"></div>
+
+    <script>
+
+      window.onload = function() {
+        atalaPrismDemo.on('iconClick', function (data) {
+          console.log(data)
+        })
+      }
+
+
+    </script>
+
+  <script type="text/javascript" src="index.bundle.js?v=121121222"></script></body>
 </html>

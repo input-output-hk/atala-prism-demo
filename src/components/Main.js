@@ -57,7 +57,10 @@ class Main extends mixin(EventEmitter, Component) {
     this.state = {
       loaded: false,
       itemsLoaded: 0,
-      itemsTotal: 0
+      itemsTotal: 0,
+      infoText: '',
+      showInfoBox: false,
+      infoBoxPosition: { x: -999, y: -999 }
     }
 
     this.root = document.getElementById(this.config.rootCanvasID)
@@ -205,7 +208,28 @@ class Main extends mixin(EventEmitter, Component) {
     }, false)
 
     RayCasterClass.getInstance().on('iconClick', (data) => {
+      this.setState({
+        infoText: data.description,
+        showInfoBox: true,
+        infoBoxPosition: {
+          x: data.mouseEvent.clientX,
+          y: data.mouseEvent.clientY
+        }
+      })
+
       this.emit('iconClick', data)
+    })
+
+    RayCasterClass.getInstance().on('iconMouseOut', () => {
+      setTimeout(() => {
+        this.setState({
+          showInfoBox: false,
+          infoBoxPosition: {
+            x: -999,
+            y: -999
+          }
+        })
+      }, 200)
     })
   }
 
@@ -253,9 +277,27 @@ class Main extends mixin(EventEmitter, Component) {
     )
   }
 
+  infoBox (props) {
+    let inlineStyle = {
+      left: props.position.x + 'px',
+      top: props.position.y + 'px'
+    }
+
+    if (props.show) {
+      return (
+        <div style={inlineStyle} className={styles.infoBox}>{props.text}</div>
+      )
+    } else {
+      return (
+        <div />
+      )
+    }
+  }
+
   render () {
     return (
       <div className={styles.container}>
+        <this.infoBox show={this.state.showInfoBox} text={this.state.infoText} position={this.state.infoBoxPosition} />
         <this.preloader loaded={this.state.loaded} itemsTotal={this.state.itemsTotal} itemsLoaded={this.state.itemsLoaded} />
         <canvas id={this.config.scene.canvasID} />
       </div>
