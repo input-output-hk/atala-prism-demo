@@ -4,6 +4,8 @@ import {
 } from 'three'
 
 import BaseClass from './BaseClass'
+import CitySceneClass from './CitySceneClass'
+import CameraClass from './CameraClass'
 
 class RendererClass extends BaseClass {
   init () {
@@ -34,6 +36,10 @@ class RendererClass extends BaseClass {
     this.renderer.dispose()
 
     super.destroy()
+  }
+
+  renderFrame ({ dt } = {}) {
+    this.renderer.render(CitySceneClass.getInstance().scene, CameraClass.getInstance().camera)
   }
 }
 

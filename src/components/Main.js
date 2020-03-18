@@ -20,7 +20,6 @@ Classes
 ------------------------------------------ */
 import LoadingManagerClass from './classes/LoadingManagerClass'
 import RendererClass from './classes/RendererClass'
-import FBOClass from './classes/FBOClass'
 import CameraClass from './classes/CameraClass'
 import ControlsClass from './classes/ControlsClass'
 import MouseClass from './classes/MouseClass'
@@ -143,11 +142,6 @@ class Main extends mixin(EventEmitter, Component) {
             SplineClass.getInstance().init(this.step)
             GroundClass.getInstance().init()
 
-            FBOClass.getInstance().init({
-              width: this.config.scene.width,
-              height: this.config.scene.height,
-              transparentBackground: this.config.post.transparentBackground
-            })
             ControlsClass.getInstance().init()
             MouseClass.getInstance().init()
             TouchClass.getInstance().init()
@@ -192,7 +186,6 @@ class Main extends mixin(EventEmitter, Component) {
     TouchClass.getInstance().renderFrame({ dt: dt })
     CameraClass.getInstance().renderFrame({ dt: dt })
     ControlsClass.getInstance().renderFrame({ dt: dt })
-    FBOClass.getInstance().renderFrame({ dt: dt })
     SpotLightClass.getInstance().renderFrame({ dt: dt })
     CityClass.getInstance().renderFrame({ dt: dt })
     IconClass.getInstance().renderFrame({ dt: dt })
@@ -200,6 +193,7 @@ class Main extends mixin(EventEmitter, Component) {
     UserIconClass.getInstance().renderFrame({ dt: dt })
     SplineClass.getInstance().renderFrame({ dt: dt })
     RayCasterClass.getInstance().renderFrame({ dt: dt })
+    RendererClass.getInstance().renderFrame({ dt: dt })
   }
 
   addEvents () {
@@ -251,7 +245,6 @@ class Main extends mixin(EventEmitter, Component) {
 
     CameraClass.getInstance().resize(this.width, this.height)
     RendererClass.getInstance().resize(this.width, this.height)
-    FBOClass.getInstance().resize(this.width, this.height)
 
     if (this.config.post.enabled) {
       this.composer.setSize(this.width, this.height)
@@ -261,7 +254,6 @@ class Main extends mixin(EventEmitter, Component) {
   destroy () {
     RendererClass.getInstance().dispose()
     ControlsClass.getInstance().destroy()
-    FBOClass.getInstance().destroy()
 
     if (this.composer) {
       delete this.composer

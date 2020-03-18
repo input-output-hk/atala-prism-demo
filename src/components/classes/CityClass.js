@@ -3,6 +3,7 @@ import {
 } from 'three'
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 
 // classes
 import BaseClass from './BaseClass'
@@ -10,7 +11,6 @@ import LoadingManagerClass from './LoadingManagerClass'
 import DatGUIClass from './DatGUIClass'
 
 // models
-// import model from '../../assets/models/city.glb'
 import model from '../../assets/models/city.glb'
 
 class CityClass extends BaseClass {
@@ -24,6 +24,11 @@ class CityClass extends BaseClass {
       let that = this
 
       this.GLTFLoader = new GLTFLoader(LoadingManagerClass.getInstance().loadingManager)
+      // Configure and create Draco decoder.
+      this.dracoLoader = new DRACOLoader()
+
+      this.dracoLoader.setDecoderPath('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/')
+      this.GLTFLoader.setDRACOLoader(this.dracoLoader)
 
       this.buildingMaterial = new MeshPhongMaterial({
         color: this.config.materials.buildingColor,
@@ -93,13 +98,13 @@ class CityClass extends BaseClass {
               case 'trees3':
                 object.children.forEach((treeParent) => {
                   treeParent.children.forEach((tree) => {
-                    tree.children[0].material = this.treeMaterial
-                    tree.children[0].receiveShadow = true
-                    tree.children[0].castShadow = true
+                    tree.material = this.treeMaterial
+                    tree.receiveShadow = true
+                    tree.castShadow = true
 
-                    tree.children[1].material = this.roadsMaterial
-                    tree.children[1].receiveShadow = true
-                    tree.children[1].castShadow = true
+                    // tree.children[1].material = this.roadsMaterial
+                    // tree.children[1].receiveShadow = true
+                    // tree.children[1].castShadow = true
                   })
                 })
                 break
