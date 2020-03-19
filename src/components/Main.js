@@ -221,7 +221,8 @@ class Main extends mixin(EventEmitter, Component) {
 
     RayCasterClass.getInstance().on('iconClick', (data) => {
       this.setState({
-        infoText: data.description,
+        infoTitle: data.title,
+        infoDescription: data.description,
         showInfoBox: true,
         infoBoxPosition: {
           x: data.mouseEvent.clientX,
@@ -295,7 +296,10 @@ class Main extends mixin(EventEmitter, Component) {
 
     if (props.show) {
       return (
-        <div style={inlineStyle} className={styles.infoBox}>{props.text}</div>
+        <div style={inlineStyle} className={styles.infoBox}>
+          <h2>{props.heading}</h2>
+          <p>{props.description}</p>
+        </div>
       )
     } else {
       return (
@@ -307,7 +311,7 @@ class Main extends mixin(EventEmitter, Component) {
   render () {
     return (
       <div className={styles.container}>
-        <this.infoBox show={this.state.showInfoBox} text={this.state.infoText} position={this.state.infoBoxPosition} />
+        <this.infoBox show={this.state.showInfoBox} description={this.state.infoDescription} heading={this.state.infoTitle} position={this.state.infoBoxPosition} />
         <this.preloader loaded={this.state.loaded} itemsTotal={this.state.itemsTotal} itemsLoaded={this.state.itemsLoaded} />
         <canvas id={this.config.scene.canvasID} />
       </div>

@@ -48,73 +48,87 @@ class Config {
       },
       icons: {
         '5G': {
-          description: {
-            'EN': '5G'
+          'EN': {
+            title: '5G',
+            description: '5G will deliver reliable data delivery which is the key to the future of citywide IoT systems'
           }
         },
         'wifi': {
-          description: {
-            'EN': 'WIFI'
+          'EN': {
+            title: 'WiFi',
+            description: 'Reliable WiFi will help bridge the digital divide and enable IoT-based smart cities'
           }
         },
         'garden': {
-          description: {
-            'EN': 'Roof Garden'
+          'EN': {
+            title: 'Vertical Garden',
+            description: 'As well as helping to counter pollution, they help insulate interiors from heat and cold and require less water than traditional gardens.'
           }
         },
         'mobile': {
-          description: {
-            'EN': 'Mobile Technology'
+          'EN': {
+            title: 'Mobile technology',
+            description: ''
           }
         },
         'solar': {
-          description: {
-            'EN': 'Solar Power'
+          'EN': {
+            title: 'Solar power',
+            description: 'Solar power as a renewable resource can provide reliable, affordable, and environmentally responsible energy'
           }
         },
         'wind': {
-          description: {
-            'EN': 'Wind Power'
+          'EN': {
+            title: 'Wind power',
+            description: 'Combines traditional traffic lights with an array of sensors and AI to intelligently route vehicle and pedestrian traffic.'
           }
         },
         'traffic': {
-          description: {
-            'EN': 'Smart Traffic'
+          'EN': {
+            title: 'Smart Traffic Light',
+            description: 'Combines traditional traffic lights with an array of sensors and AI to intelligently route vehicle and pedestrian traffic.'
           }
         },
         'car': {
-          description: {
-            'EN': 'Electric Vehicles'
+          'EN': {
+            title: 'Electric Vehicles',
+            description: 'Along with reducing transport emissions, EV’s will have a significant influence on infrastructure and smart city usecases.'
           }
         },
         'bike': {
-          description: {
-            'EN': 'Cycles'
+          'EN': {
+            title: 'Cycle Lanes',
+            description: 'Cycling is the most efficient, effective, and economic method of personal transportation across an urban landscape'
           }
         },
         'cloud': {
-          description: {
-            'EN': 'Cloud Computing'
+          'EN': {
+            title: 'Cloud Computing',
+            description: 'Cloud-based applications and services will have the capacity to reduce costs for citizens while delivering better service in an IoT-based smart city'
           }
         },
         'gov': {
-          description: {
-            'EN': 'Government Office'
+          'EN': {
+            title: 'Government',
+            description: 'Government department that is responsible for issuing government identities. '
           }
         },
         'uni': {
-          description: {
-            'EN': 'University'
+          'EN': {
+            title: 'University',
+            description: 'Place of third-level and further education where certificate can be issued digitally using Atala Prism. '
           }
         },
         'job': {
-          description: {
-            'EN': 'Workplace'
+          'EN': {
+            title: 'Workplace',
+            description: 'Place of work where digital identity can be used to physically access building. Proof of employment can be issued digitally using Atala Prism.'
           }
         },
         'insurance': {
-          description: {
-            'EN': 'Insurance'
+          'EN': {
+            title: 'Insurance Company',
+            description: 'Company that sells insurance products. Certificate of policies can be issued using Atala Prism.'
           }
         }
       },

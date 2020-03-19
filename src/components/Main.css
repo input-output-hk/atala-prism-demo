@@ -75,4 +75,16 @@
     background: rgba(255,255,255, 0.8);
     padding: 10px;
     font-size: 12px;
+    width: 300px;
+    line-height: 15px;
+}
+
+.infoBox h2 {
+    font-size: 13px;
+    line-height: 17px;
+    margin-bottom: 7px;
+}
+
+.infoBox p {
+    line-height: 17px;
 }

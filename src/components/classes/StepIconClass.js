@@ -46,22 +46,26 @@ class StepIconClass extends BaseClass {
         'gov': {
           url: imageGov,
           position: new Vector3(-18, 24.5, -6),
-          description: this.config.icons['gov'].description
+          title: this.config.icons['gov'][this.config.language].title,
+          description: this.config.icons['gov'][this.config.language].description
         },
         'uni': {
           url: imageUni,
           position: new Vector3(37, 13, 4.6),
-          description: this.config.icons['uni'].description
+          title: this.config.icons['uni'][this.config.language].title,
+          description: this.config.icons['uni'][this.config.language].description
         },
         'job': {
           url: imageJob,
           position: new Vector3(-20, 45, -18.5),
-          description: this.config.icons['job'].description
+          title: this.config.icons['job'][this.config.language].title,
+          description: this.config.icons['job'][this.config.language].description
         },
         'insurance': {
           url: imageInsurance,
           position: new Vector3(-39, 31, -33),
-          description: this.config.icons['insurance'].description
+          title: this.config.icons['insurance'][this.config.language].title,
+          description: this.config.icons['insurance'][this.config.language].description
         }
       }
 
@@ -87,7 +91,8 @@ class StepIconClass extends BaseClass {
               const iconMesh = mesh.clone()
               iconMesh.material = this.material.clone()
 
-              iconMesh.description = this.icons[key].description[this.config.language]
+              iconMesh.description = this.icons[key].description
+              iconMesh.title = this.icons[key].title
 
               iconMesh.hoverColor = this.hoverColor
 
