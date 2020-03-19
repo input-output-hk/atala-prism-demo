@@ -48,6 +48,7 @@ class Main extends mixin(EventEmitter, Component) {
 
     this.config = new Config().data
     this.clock = new Clock()
+    this.debug = false
 
     this.initLoader()
 
@@ -111,6 +112,11 @@ class Main extends mixin(EventEmitter, Component) {
     if (!isNaN(step)) {
       this.step = step
     }
+
+    const debug = parseInt(getUrlParameter('debug'))
+    if (!isNaN(debug)) {
+      this.debug = !!debug
+    }
   }
 
   initAPIMethods () {
@@ -125,7 +131,7 @@ class Main extends mixin(EventEmitter, Component) {
   initStage () {
     this.setConfigFromURLParams()
 
-    DatGUIClass.getInstance().init()
+    DatGUIClass.getInstance().init(this.debug)
     StepClass.getInstance().init()
 
     CameraClass.getInstance().init()

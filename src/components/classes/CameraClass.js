@@ -52,8 +52,6 @@ class CameraClass extends BaseClass {
         duration: 2,
         ease: 'sine.out',
         onUpdate: function () {
-          console.log(params)
-
           this.camera.position.x = params.camPosX
           this.camera.position.y = params.camPosY
           this.camera.position.z = params.camPosZ

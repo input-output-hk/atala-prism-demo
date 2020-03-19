@@ -8,9 +8,11 @@ import DatGUIClass from './DatGUIClass'
 
 class StepClass extends BaseClass {
   init () {
-    this.controls = DatGUIClass.getInstance().gui.addFolder('Steps')
-    this.controls.add(this, 'incrementStep')
-    this.controls.open()
+    if (DatGUIClass.getInstance().debug) {
+      this.controls = DatGUIClass.getInstance().gui.addFolder('Steps')
+      this.controls.add(this, 'incrementStep')
+      this.controls.open()
+    }
 
     this.step = 0
     this.steps = 4
