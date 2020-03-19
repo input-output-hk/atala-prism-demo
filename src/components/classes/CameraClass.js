@@ -5,7 +5,6 @@ import {
 
 import BaseClass from './BaseClass'
 import StepClass from './StepClass'
-import ControlsClass from './ControlsClass'
 
 import { gsap } from 'gsap'
 
@@ -40,31 +39,24 @@ class CameraClass extends BaseClass {
         this.config.camera.stepPos[data.step].z
       )
 
-      const newControlsParams = this.config.camera.stepControlsParams[data.step]
-
       const params = {
-        camPos: this.camera.position,
-        maxAzimuthAngle: ControlsClass.getInstance().controls.maxAzimuthAngle,
-        minAzimuthAngle: ControlsClass.getInstance().controls.minAzimuthAngle
+        camPosX: this.camera.position.x,
+        camPosY: this.camera.position.y,
+        camPosZ: this.camera.position.z
       }
 
       gsap.to(params, {
-        campos: {
-          x: newCamPos.x,
-          y: newCamPos.y,
-          z: newCamPos.z
-        },
-        maxAzimuthAngle: newControlsParams.maxAzimuthAngle,
-        minAzimuthAngle: newControlsParams.minAzimuthAngle,
+        camPosX: newCamPos.x,
+        camPosY: newCamPos.y,
+        camPosZ: newCamPos.z,
         duration: 2,
         ease: 'sine.out',
         onUpdate: function () {
-          this.camera.position.x = params.camPos.x
-          this.camera.position.y = params.camPos.y
-          this.camera.position.z = params.camPos.z
+          console.log(params)
 
-          ControlsClass.getInstance().controls.maxAzimuthAngle = params.maxAzimuthAngle
-          ControlsClass.getInstance().controls.minAzimuthAngle = params.minAzimuthAngle
+          this.camera.position.x = params.camPosX
+          this.camera.position.y = params.camPosY
+          this.camera.position.z = params.camPosZ
 
           this.camera.lookAt(new Vector3(0, 0, 0))
 

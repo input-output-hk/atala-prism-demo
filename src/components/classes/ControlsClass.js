@@ -1,4 +1,4 @@
-import { OrbitControls } from '../../3rdParty/OrbitControls'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import CameraClass from './CameraClass'
 import RendererClass from './RendererClass'
@@ -12,18 +12,18 @@ class ControlsClass extends BaseClass {
     this.controls.maxDistance = 700
     this.controls.enablePan = false
     this.controls.enableZoom = this.config.camera.enableZoom
-    this.controls.zoomSpeed = 0.1
-    this.controls.rotateSpeed = 0.55
+    this.controls.zoomSpeed = 0.7
+    this.controls.rotateSpeed = 0.45
     this.controls.autoRotateSpeed = 0.3
     this.controls.autoRotate = false
-    this.controls.enableDamping = true
-    this.controls.dampingFactor = 0.0008
-    this.controls.maxPolarAngle = (Math.PI / 2) - 0.25
-    this.controls.minPolarAngle = 1
-    this.controls.maxAzimuthAngle = -0.5
-    this.controls.minAzimuthAngle = -1.0
+    this.controls.enableDamping = false
+    this.controls.dampingFactor = 0.01
+    this.controls.maxPolarAngle = (Math.PI / 2) - 0.1
+    // this.controls.minPolarAngle = 1
+    // this.controls.maxAzimuthAngle = -0.5
+    // this.controls.minAzimuthAngle = -1.0
 
-    this.movementPaused = false
+    // this.movementPaused = false
   }
 
   destroy () {
@@ -32,17 +32,17 @@ class ControlsClass extends BaseClass {
   }
 
   renderFrame () {
-    if (this.movementPaused) {
-      return
-    }
+    // if (this.movementPaused) {
+    //   return
+    // }
+    this.controls.update()
 
-    if (this.controls) {
-      if (CameraClass.getInstance().isAnimating) {
-        this.controls.update()
-      } else {
-        this.controls.update(MouseClass.getInstance().mousePos)
-      }
-    }
+    // if (this.controls) {
+    //   if (CameraClass.getInstance().isAnimating) {
+    //   } else {
+    //     this.controls.update(MouseClass.getInstance().mousePos)
+    //   }
+    // }
   }
 }
 

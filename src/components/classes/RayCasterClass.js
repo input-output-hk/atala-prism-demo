@@ -5,8 +5,8 @@ import {
 import BaseClass from './BaseClass'
 import MouseClass from './MouseClass'
 import CameraClass from './CameraClass'
-import ControlsClass from './ControlsClass'
-import DatGUIClass from './DatGUIClass'
+// import ControlsClass from './ControlsClass'
+// import DatGUIClass from './DatGUIClass'
 
 class RayCasterClass extends BaseClass {
   init () {
@@ -54,12 +54,12 @@ class RayCasterClass extends BaseClass {
     if (intersected.length > 0) {
       this.mouseOver = true
 
-      ControlsClass.getInstance().movementPaused = true
+      // ControlsClass.getInstance().movementPaused = true
 
       document.body.style.cursor = 'pointer'
     } else {
       if (this.mouseOver) {
-        ControlsClass.getInstance().movementPaused = false
+        // ControlsClass.getInstance().movementPaused = false
 
         document.body.style.cursor = 'default'
 
