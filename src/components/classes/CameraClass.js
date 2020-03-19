@@ -3,10 +3,10 @@ import {
   Vector3
 } from 'three'
 
+import { gsap } from 'gsap'
+
 import BaseClass from './BaseClass'
 import StepClass from './StepClass'
-
-import { gsap } from 'gsap'
 
 class CameraClass extends BaseClass {
   init () {

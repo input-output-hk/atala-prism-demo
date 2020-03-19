@@ -152,6 +152,10 @@ class IconClass extends BaseClass {
               iconMesh.position.y = this.icons[key].position.y
               iconMesh.position.z = this.icons[key].position.z
 
+              iconMesh.initialQuat = iconMesh.quaternion.clone()
+              iconMesh.isHovered = false
+              iconMesh.isAnimating = false
+
               // const controls = DatGUIClass.getInstance().gui.addFolder(key + ' Position')
               // controls.add(iconMesh.position, 'x').name('x')
               // controls.add(iconMesh.position, 'y').name('y')

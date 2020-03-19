@@ -81,7 +81,6 @@ class StepIconClass extends BaseClass {
           function (gltf) {
             const mesh = gltf.scene.children[0]
 
-            mesh.rotateZ(Math.PI)
             mesh.scale.set(0.8, 0.5, 0.8)
 
             for (const key in this.icons) {
@@ -97,6 +96,10 @@ class StepIconClass extends BaseClass {
               iconMesh.position.x = this.icons[key].position.x
               iconMesh.position.y = this.icons[key].position.y
               iconMesh.position.z = this.icons[key].position.z
+
+              iconMesh.initialQuat = iconMesh.quaternion.clone()
+              iconMesh.isHovered = false
+              iconMesh.isAnimating = false
 
               // const controls = DatGUIClass.getInstance().gui.addFolder(key + ' Position')
               // controls.add(iconMesh.position, 'x').name('x')
