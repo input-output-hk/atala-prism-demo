@@ -18,7 +18,7 @@ class Config {
 
   init () {
     this.data = {
-      rootCanvasID: 'atala-prism-demo-root',
+      rootID: 'atala-prism-demo-root',
       language: 'EN',
       scene: {
         yOffset: -8,
@@ -50,13 +50,13 @@ class Config {
         '5G': {
           'EN': {
             title: '5G',
-            description: '5G will deliver reliable data delivery which is the key to the future of citywide IoT systems'
+            description: '5G will deliver reliable data delivery which is the key to the future of citywide IoT systems.'
           }
         },
         'wifi': {
           'EN': {
             title: 'WiFi',
-            description: 'Reliable WiFi will help bridge the digital divide and enable IoT-based smart cities'
+            description: 'Reliable WiFi will help bridge the digital divide and enable IoT-based smart cities.'
           }
         },
         'garden': {
@@ -74,13 +74,13 @@ class Config {
         'solar': {
           'EN': {
             title: 'Solar power',
-            description: 'Solar power as a renewable resource can provide reliable, affordable, and environmentally responsible energy'
+            description: 'Solar power as a renewable resource can provide reliable, affordable, and environmentally responsible energy.'
           }
         },
         'wind': {
           'EN': {
             title: 'Wind power',
-            description: 'Combines traditional traffic lights with an array of sensors and AI to intelligently route vehicle and pedestrian traffic.'
+            description: 'Wind power as a renewable resource can provide reliable, affordable, and environmentally responsible energy.'
           }
         },
         'traffic': {
@@ -98,25 +98,25 @@ class Config {
         'bike': {
           'EN': {
             title: 'Cycle Lanes',
-            description: 'Cycling is the most efficient, effective, and economic method of personal transportation across an urban landscape'
+            description: 'Cycling is the most efficient, effective, and economic method of personal transportation across an urban landscape.'
           }
         },
         'cloud': {
           'EN': {
             title: 'Cloud Computing',
-            description: 'Cloud-based applications and services will have the capacity to reduce costs for citizens while delivering better service in an IoT-based smart city'
+            description: 'Cloud-based applications and services will have the capacity to reduce costs for citizens while delivering better service in an IoT-based smart city.'
           }
         },
         'gov': {
           'EN': {
             title: 'Government',
-            description: 'Government department that is responsible for issuing government identities. '
+            description: 'Government department that is responsible for issuing government identities.'
           }
         },
         'uni': {
           'EN': {
             title: 'University',
-            description: 'Place of third-level and further education where certificate can be issued digitally using Atala Prism. '
+            description: 'Place of third-level and further education where certificate can be issued digitally using Atala Prism.'
           }
         },
         'job': {
@@ -158,9 +158,6 @@ class Config {
         near: 100,
         far: 1000,
         enableZoom: true // enable camera zoom on mousewheel/pinch gesture
-      },
-      dev: {
-        debugPicker: false
       },
       detector: Detector,
       floatType: Detector.isIOS ? HalfFloatType : FloatType

@@ -63,7 +63,7 @@ class Main extends mixin(EventEmitter, Component) {
       infoBoxPosition: { x: -999, y: -999 }
     }
 
-    this.root = document.getElementById(this.config.rootCanvasID)
+    this.root = document.getElementById(this.config.rootID)
 
     window.atalaPrismDemo = this
   }
