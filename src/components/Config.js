@@ -46,6 +46,9 @@ class Config {
         2: 'job',
         3: 'insurance'
       },
+      popupTitle: {
+        'EN': 'Smart City'
+      },
       icons: {
         '5G': {
           'EN': {

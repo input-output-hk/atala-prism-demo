@@ -34,6 +34,8 @@ class RayCasterClass extends BaseClass {
     }
 
     this.emit('iconClick', {
+      'category': this.hovered.category,
+      'type': this.hovered.type,
       'description': this.hovered.description,
       'title': this.hovered.title,
       mouseEvent

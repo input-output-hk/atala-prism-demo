@@ -68,23 +68,121 @@
 }
 
 .infoBox {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.4px;
     position: absolute;
     left: 0;
     top: 0;
     z-index: 1;
-    background: rgba(255,255,255, 0.8);
-    padding: 10px;
+    background: rgba(255,255,255, 1);
     font-size: 12px;
     width: 300px;
     line-height: 15px;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.4);
+    border-radius: 8px;
+}
+
+.infoBoxTop {
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+    color: #fff;
+}
+
+.infoBoxTop.smartBoxTop {
+    background: #3eccc8;
+}
+
+.infoBoxTop.stepBoxTop {
+    background: #f83633;
+}
+
+.infoBoxBottom {
+    padding: 15px;
 }
 
 .infoBox h2 {
-    font-size: 13px;
+    font-weight: normal;
+    font-size: 14px;
     line-height: 17px;
-    margin-bottom: 7px;
+    margin-bottom: 0;
+}
+
+.infoBox h3 {
+    font-weight: normal;
+    font-size: 11px;
+    margin: 0 0 8px;
 }
 
 .infoBox p {
     line-height: 17px;
+}
+
+.smartIcon {
+    width: 50px;
+    height: 50px;
+    display: block;
+    float: right;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    margin: 0px -9px 0 0;
+}
+
+.type-garden .smartIcon {
+    background-image: url('../assets/textures/flower.png');
+}
+
+.type-5G .smartIcon {
+    background-image: url('../assets/textures/5g.png');
+}
+
+.type-wifi .smartIcon {
+    background-image: url('../assets/textures/wifi.png');
+}
+
+.type-mobile .smartIcon {
+    background-image: url('../assets/textures/mobile.png');
+}
+
+.type-solar .smartIcon {
+    background-image: url('../assets/textures/solar.png');
+}
+
+.type-wind .smartIcon {
+    background-image: url('../assets/textures/wind.png');
+}
+
+.type-traffic .smartIcon {
+    background-image: url('../assets/textures/traffic.png');
+}
+
+.type-car .smartIcon {
+    background-image: url('../assets/textures/car.png');
+}
+
+.type-bike .smartIcon {
+    background-image: url('../assets/textures/bike.png');
+}
+
+.type-cloud .smartIcon {
+    background-image: url('../assets/textures/cloud.png');
+}
+
+.type-gov .smartIcon {
+    background-size: 186%;
+    background-image: url('../assets/textures/gov.png');
+}
+
+.type-uni .smartIcon {
+    background-size: 186%;
+    background-image: url('../assets/textures/uni.png');
+}
+
+.type-insurance .smartIcon {
+    background-size: 186%;
+    background-image: url('../assets/textures/insurance.png');
+}
+
+.type-job .smartIcon {
+    background-size: 186%;
+    background-image: url('../assets/textures/job.png');
 }

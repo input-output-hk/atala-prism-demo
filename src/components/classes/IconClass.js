@@ -57,72 +57,96 @@ class IconClass extends BaseClass {
 
       this.icons = {
         '5gTall': {
+          category: 'smart',
+          type: '5G',
           url: image5g,
           position: new Vector3(-6, 57, -21),
           title: this.config.icons['5G'][this.config.language].title,
           description: this.config.icons['5G'][this.config.language].description
         },
         '5gShort': {
+          category: 'smart',
+          type: '5G',
           url: image5g,
           position: new Vector3(11, 29, 8),
           title: this.config.icons['5G'][this.config.language].title,
           description: this.config.icons['5G'][this.config.language].description
         },
         'wifi1': {
+          category: 'smart',
+          type: 'wifi',
           url: imageWifi,
           position: new Vector3(-37.7, 19, -6),
           title: this.config.icons['wifi'][this.config.language].title,
           description: this.config.icons['wifi'][this.config.language].description
         },
         'wifi2': {
+          category: 'smart',
+          type: 'wifi',
           url: imageWifi,
           position: new Vector3(-37.7, 19, 8.5),
           title: this.config.icons['wifi'][this.config.language].title,
           description: this.config.icons['wifi'][this.config.language].description
         },
         'garden': {
+          category: 'smart',
+          type: 'garden',
           url: imageGarden,
           position: new Vector3(-38.5, 24, -19.1),
           title: this.config.icons['garden'][this.config.language].title,
           description: this.config.icons['garden'][this.config.language].description
         },
         'mobile': {
+          category: 'smart',
+          type: 'mobile',
           url: imageMobile,
           position: new Vector3(-35, 4, 34),
           title: this.config.icons['mobile'][this.config.language].title,
           description: this.config.icons['mobile'][this.config.language].description
         },
         'solar': {
+          category: 'smart',
+          type: 'solar',
           url: imageSolar,
           position: new Vector3(-44, 4, 53),
           title: this.config.icons['solar'][this.config.language].title,
           description: this.config.icons['solar'][this.config.language].description
         },
         'wind': {
+          category: 'smart',
+          type: 'wind',
           url: imageWind,
           position: new Vector3(-15, 13, 56),
           title: this.config.icons['wind'][this.config.language].title,
           description: this.config.icons['wind'][this.config.language].description
         },
         'traffic': {
+          category: 'smart',
+          type: 'traffic',
           url: imageTraffic,
           position: new Vector3(16, 4, 21),
           title: this.config.icons['traffic'][this.config.language].title,
           description: this.config.icons['traffic'][this.config.language].description
         },
         'car': {
+          category: 'smart',
+          type: 'car',
           url: imageCar,
           position: new Vector3(-30, 4, 18),
           title: this.config.icons['car'][this.config.language].title,
           description: this.config.icons['car'][this.config.language].description
         },
         'bike': {
+          category: 'smart',
+          type: 'bike',
           url: imageBike,
           position: new Vector3(18, 4, 57),
           title: this.config.icons['bike'][this.config.language].title,
           description: this.config.icons['bike'][this.config.language].description
         },
         'cloud': {
+          category: 'smart',
+          type: 'cloud',
           url: imageCloud,
           position: new Vector3(12, 45.5, -7),
           title: this.config.icons['cloud'][this.config.language].title,
@@ -157,6 +181,8 @@ class IconClass extends BaseClass {
 
               iconMesh.description = this.icons[key].description
               iconMesh.title = this.icons[key].title
+              iconMesh.type = this.icons[key].type
+              iconMesh.category = this.icons[key].category
 
               iconMesh.hoverColor = this.hoverColor
 

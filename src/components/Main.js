@@ -58,9 +58,12 @@ class Main extends mixin(EventEmitter, Component) {
       loaded: false,
       itemsLoaded: 0,
       itemsTotal: 0,
-      infoText: '',
       showInfoBox: false,
-      infoBoxPosition: { x: -999, y: -999 }
+      infoBoxPosition: { x: -999, y: -999 },
+      infoCategory: '',
+      infoType: '',
+      infoTitle: '',
+      infoDescription: ''
     }
 
     this.root = document.getElementById(this.config.rootID)
@@ -221,6 +224,9 @@ class Main extends mixin(EventEmitter, Component) {
 
     RayCasterClass.getInstance().on('iconClick', (data) => {
       this.setState({
+        popupTitle: this.config.popupTitle[this.config.language],
+        infoCategory: data.category,
+        infoType: data.type,
         infoTitle: data.title,
         infoDescription: data.description,
         showInfoBox: true,
@@ -294,11 +300,22 @@ class Main extends mixin(EventEmitter, Component) {
       top: props.position.y + 'px'
     }
 
+    let topCSSClass = styles.smartBoxTop
+    if (props.category === 'step') {
+      topCSSClass = styles.stepBoxTop
+    }
+
     if (props.show) {
       return (
-        <div style={inlineStyle} className={styles.infoBox}>
-          <h2>{props.heading}</h2>
-          <p>{props.description}</p>
+        <div style={inlineStyle} className={styles.infoBox + ' ' + styles['type-' + props.type]}>
+          <div className={styles.infoBoxTop + ' ' + topCSSClass}>
+            <div className={styles.smartIcon} />
+            <h3>{props.popupTitle}</h3>
+            <h2>{props.heading}</h2>
+          </div>
+          <div className={styles.infoBoxBottom}>
+            <p>{props.description}</p>
+          </div>
         </div>
       )
     } else {
@@ -311,8 +328,20 @@ class Main extends mixin(EventEmitter, Component) {
   render () {
     return (
       <div className={styles.container}>
-        <this.infoBox show={this.state.showInfoBox} description={this.state.infoDescription} heading={this.state.infoTitle} position={this.state.infoBoxPosition} />
-        <this.preloader loaded={this.state.loaded} itemsTotal={this.state.itemsTotal} itemsLoaded={this.state.itemsLoaded} />
+        <this.infoBox
+          show={this.state.showInfoBox}
+          popupTitle={this.state.popupTitle}
+          description={this.state.infoDescription}
+          heading={this.state.infoTitle}
+          type={this.state.infoType}
+          category={this.state.infoCategory}
+          position={this.state.infoBoxPosition}
+        />
+        <this.preloader
+          loaded={this.state.loaded}
+          itemsTotal={this.state.itemsTotal}
+          itemsLoaded={this.state.itemsLoaded}
+        />
         <canvas id={this.config.scene.canvasID} />
       </div>
     )
