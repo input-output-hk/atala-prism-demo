@@ -224,7 +224,7 @@ class Main extends mixin(EventEmitter, Component) {
 
     RayCasterClass.getInstance().on('iconClick', (data) => {
       this.setState({
-        popupTitle: this.config.popupTitle[this.config.language],
+        popupTitle: data.popupTitle,
         infoCategory: data.category,
         infoType: data.type,
         infoTitle: data.title,

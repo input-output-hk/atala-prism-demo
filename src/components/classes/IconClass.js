@@ -183,6 +183,7 @@ class IconClass extends BaseClass {
               iconMesh.title = this.icons[key].title
               iconMesh.type = this.icons[key].type
               iconMesh.category = this.icons[key].category
+              iconMesh.popupTitle = this.config.popupTitleSmartCity[this.config.language]
 
               iconMesh.hoverColor = this.hoverColor
 
