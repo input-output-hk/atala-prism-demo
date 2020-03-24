@@ -20,9 +20,16 @@ class SplineClass extends BaseClass {
   init (step = 0) {
     this.pointCount = 50
     this.geometries = []
+    this.lines = []
 
     this.material = new LineDashedMaterial({
       color: 0xff0000,
+      dashSize: 1,
+      gapSize: 0.8
+    })
+
+    this.visitedMaterial = new LineDashedMaterial({
+      color: 0x777777,
       dashSize: 1,
       gapSize: 0.8
     })
@@ -58,10 +65,10 @@ class SplineClass extends BaseClass {
       this.geometries[index] = new BufferGeometry().setFromPoints(points)
       this.geometries[index].setDrawRange(0, 0)
 
-      const line = new Line(this.geometries[index], this.material)
-      line.computeLineDistances()
+      this.lines[index] = new Line(this.geometries[index], this.material)
+      this.lines[index].computeLineDistances()
 
-      this.mesh.add(line)
+      this.mesh.add(this.lines[index])
     }
 
     StepClass.getInstance().on('setStep', (data) => {
@@ -72,10 +79,16 @@ class SplineClass extends BaseClass {
   setStep (step) {
     const tl = gsap.timeline()
 
+    for (let index = 0; index < this.lines.length; index++) {
+      this.lines[index].material = this.visitedMaterial.clone()
+    }
+
     for (let index = 0; index < step; index++) {
       if (this.geometries[index].drawRange.count >= this.pointCount) {
         continue
       }
+
+      this.lines[index].material = this.material.clone()
 
       let params = {
         drawRange: 0

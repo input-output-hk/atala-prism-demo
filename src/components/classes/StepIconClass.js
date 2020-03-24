@@ -112,6 +112,8 @@ class StepIconClass extends BaseClass {
               iconMesh.position.x = this.icons[key].position.x
               iconMesh.position.y = this.icons[key].position.y
               iconMesh.position.z = this.icons[key].position.z
+              
+              iconMesh.position.z += 0.5
 
               iconMesh.initialQuat = iconMesh.quaternion.clone()
               iconMesh.isHovered = false
