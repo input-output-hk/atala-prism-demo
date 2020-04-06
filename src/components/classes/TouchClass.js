@@ -16,9 +16,10 @@ class TouchClass extends BaseClass {
     this.touchPos = new Vector2()
     this.normalizedTouchPos = new Vector2()
     this.prevNormalizedTouchPos = new Vector2()
+    this.ndc = new Vector2()
   }
 
-  onTouchMove (e) {
+  updateTouchPos (e) {
     if (typeof e.touches[0] === 'undefined') {
       return
     } else {
@@ -44,6 +45,21 @@ class TouchClass extends BaseClass {
 
     this.normalizedTouchPos.x = x / RendererClass.getInstance().renderer.domElement.width
     this.normalizedTouchPos.y = 1 - y / RendererClass.getInstance().renderer.domElement.height
+
+    this.ndc.x = (2 * this.normalizedTouchPos.x) - 1
+    this.ndc.y = (2 * this.normalizedTouchPos.y) - 1
+  }
+
+  onTouchMove (e) {
+    this.updateTouchPos(e)
+  }
+
+  onTouchStart (e) {
+    this.updateTouchPos(e)
+  }
+
+  onTouchEnd (e) {
+    this.updateTouchPos(e)
   }
 
   renderFrame ({ dt } = {}) {

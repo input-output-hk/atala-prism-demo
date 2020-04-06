@@ -42,7 +42,7 @@ Styles
 ------------------------------------------ */
 import styles from './Main.css'
 
-class Main extends mixin(EventEmitter, Component) {
+class AtalaPrismDemo extends mixin(EventEmitter, Component) {
   constructor (props) {
     super(props)
 
@@ -209,20 +209,37 @@ class Main extends mixin(EventEmitter, Component) {
     window.addEventListener('resize', this.resize.bind(this), false)
     this.resize()
 
-    this.root.addEventListener('mousemove', (e) => {
+    RendererClass.getInstance().renderer.domElement.addEventListener('mousemove', (e) => {
       MouseClass.getInstance().onMouseMove(e)
     }, false)
 
-    this.root.addEventListener('mousedown', (e) => {
-      e.preventDefault()
+    RendererClass.getInstance().renderer.domElement.addEventListener('mousedown', (e) => {
       RayCasterClass.getInstance().onMouseDown(e)
     }, false)
 
-    this.root.addEventListener('touchmove', (e) => {
+    RendererClass.getInstance().renderer.domElement.addEventListener('touchmove', (e) => {
       TouchClass.getInstance().onTouchMove(e)
     }, false)
 
+    RendererClass.getInstance().renderer.domElement.addEventListener('touchstart', (e) => {
+      TouchClass.getInstance().onTouchStart(e)
+      RayCasterClass.getInstance().onMouseDown(e)
+    }, false)
+
+    RendererClass.getInstance().renderer.domElement.addEventListener('touchend', (e) => {
+      TouchClass.getInstance().onTouchEnd(e)
+    }, false)
+
     RayCasterClass.getInstance().on('iconClick', (data) => {
+      let interactionPos = { x: -999, y: -999 }
+      if (this.config.detector.isMobile) {
+        if (typeof data.mouseEvent.touches[0] !== 'undefined') {
+          interactionPos = data.mouseEvent.touches[0]
+        }
+      } else {
+        interactionPos = data.mouseEvent
+      }
+
       this.setState({
         popupTitle: data.popupTitle,
         infoCategory: data.category,
@@ -231,8 +248,8 @@ class Main extends mixin(EventEmitter, Component) {
         infoDescription: data.description,
         showInfoBox: true,
         infoBoxPosition: {
-          x: data.mouseEvent.clientX,
-          y: data.mouseEvent.clientY
+          x: interactionPos.clientX,
+          y: interactionPos.clientY
         }
       })
 
@@ -348,4 +365,4 @@ class Main extends mixin(EventEmitter, Component) {
   }
 }
 
-export default Main
+export default AtalaPrismDemo

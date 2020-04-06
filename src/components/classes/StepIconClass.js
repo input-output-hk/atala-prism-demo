@@ -11,7 +11,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import BaseClass from './BaseClass'
 import LoadingManagerClass from './LoadingManagerClass'
 import RendererClass from './RendererClass'
-import DatGUIClass from './DatGUIClass'
+// import DatGUIClass from './DatGUIClass'
 import RayCasterClass from './RayCasterClass'
 
 // models
@@ -112,7 +112,7 @@ class StepIconClass extends BaseClass {
               iconMesh.position.x = this.icons[key].position.x
               iconMesh.position.y = this.icons[key].position.y
               iconMesh.position.z = this.icons[key].position.z
-              
+
               iconMesh.position.z += 0.5
 
               iconMesh.initialQuat = iconMesh.quaternion.clone()

@@ -11,8 +11,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import BaseClass from './BaseClass'
 import LoadingManagerClass from './LoadingManagerClass'
 import RendererClass from './RendererClass'
-import DatGUIClass from './DatGUIClass'
-import RayCasterClass from './RayCasterClass'
+// import DatGUIClass from './DatGUIClass'
+// import RayCasterClass from './RayCasterClass'
 
 // models
 import model from '../../assets/models/user-icon.glb'

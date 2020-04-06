@@ -8,6 +8,7 @@ import { gsap } from 'gsap'
 import BaseClass from './BaseClass'
 import MouseClass from './MouseClass'
 import CameraClass from './CameraClass'
+import TouchClass from './TouchClass'
 // import ControlsClass from './ControlsClass'
 // import DatGUIClass from './DatGUIClass'
 
@@ -50,17 +51,17 @@ class RayCasterClass extends BaseClass {
 
     this.hovered = null
 
-    this.raycaster.setFromCamera(MouseClass.getInstance().ndc, CameraClass.getInstance().camera)
+    if (this.config.detector.isMobile) {
+      this.raycaster.setFromCamera(TouchClass.getInstance().ndc, CameraClass.getInstance().camera)
+    } else {
+      this.raycaster.setFromCamera(MouseClass.getInstance().ndc, CameraClass.getInstance().camera)
+    }
 
     const intersected = this.raycaster.intersectObjects(this.intersects)
 
     if (intersected.length === this.intersects.length) {
       return
     }
-
-    // this.intersects.forEach((object) => {
-    //   object.material.color.set(0xffffff)
-    // })
 
     if (intersected.length > 0) {
       this.mouseOver = true

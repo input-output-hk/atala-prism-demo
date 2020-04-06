@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import CameraClass from './CameraClass'
 import RendererClass from './RendererClass'
 import BaseClass from './BaseClass'
-import MouseClass from './MouseClass'
+// import MouseClass from './MouseClass'
 
 class ControlsClass extends BaseClass {
   init () {

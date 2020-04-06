@@ -6,7 +6,7 @@ import {
 
 // classes
 import BaseClass from './BaseClass'
-import CityClass from './CityClass'
+// import CityClass from './CityClass'
 
 class GroundClass extends BaseClass {
   init () {

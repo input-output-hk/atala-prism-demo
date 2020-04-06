@@ -5,7 +5,7 @@ import {
 } from 'three'
 
 import BaseClass from './BaseClass'
-import DatGUIClass from './DatGUIClass'
+// import DatGUIClass from './DatGUIClass'
 
 class SpotLightClass extends BaseClass {
   init () {

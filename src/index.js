@@ -1,5 +1,5 @@
-import Main from './components/Main'
+import AtalaPrismDemo from './components/AtalaPrismDemo'
 
 export {
-  Main
+  AtalaPrismDemo
 }
