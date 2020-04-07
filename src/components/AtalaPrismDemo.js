@@ -40,7 +40,7 @@ import RayCasterClass from './classes/RayCasterClass'
 /* ------------------------------------------
 Styles
 ------------------------------------------ */
-import styles from './Main.css'
+import styles from './index.css'
 
 class AtalaPrismDemo extends mixin(EventEmitter, Component) {
   constructor (props) {
