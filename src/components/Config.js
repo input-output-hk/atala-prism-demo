@@ -6,6 +6,8 @@ import {
 
 import Detector from '../libs/Detector'
 
+import { getGPUTier } from 'detect-gpu'
+
 class Config {
   constructor () {
     if (!Config.instance) {
@@ -17,6 +19,8 @@ class Config {
   }
 
   init () {
+    const GPUTier = getGPUTier()
+
     this.data = {
       rootID: 'atala-prism-demo-root',
       language: 'EN',
@@ -165,6 +169,7 @@ class Config {
         far: 1000,
         enableZoom: true // enable camera zoom on mousewheel/pinch gesture
       },
+      GPUTier: GPUTier,
       detector: Detector,
       floatType: Detector.isIOS ? HalfFloatType : FloatType
     }

@@ -51,8 +51,8 @@ class SpotLightClass extends BaseClass {
   }
 
   renderFrame () {
-    this.lightHelper.update()
-    this.shadowHelper.update()
+    //this.lightHelper.update()
+    //this.shadowHelper.update()
   }
 }
 

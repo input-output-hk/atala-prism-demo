@@ -18,7 +18,7 @@ import StepClass from './StepClass'
 
 class SplineClass extends BaseClass {
   init (step = 0) {
-    this.pointCount = 50
+    this.pointCount = 20
     this.geometries = []
     this.lines = []
 
