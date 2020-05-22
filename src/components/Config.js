@@ -119,26 +119,26 @@ class Config {
         },
         'gov': {
           'EN': {
-            title: 'Government',
-            description: 'Government department that is responsible for issuing government identities.'
+            title: 'Metropol City Government',
+            description: 'Metropol City Government uses Atala PRISM to issue verifiable digital IDs.'
           }
         },
         'uni': {
           'EN': {
-            title: 'University',
-            description: 'Place of third-level and further education where certificate can be issued digitally using Atala Prism.'
+            title: 'University of Innovation and Technology',
+            description: 'University of Innovation and Technology uses Atala PRISM to issue degrees to its students.'
           }
         },
         'job': {
           'EN': {
-            title: 'Workplace',
-            description: 'Place of work where digital identity can be used to physically access building. Proof of employment can be issued digitally using Atala Prism.'
+            title: 'Decentralized  Inc.',
+            description: 'Decentralized Inc. uses Atala PRISM in its hiring workflow to accept job applications and instantly verify applicant credentials.'
           }
         },
         'insurance': {
           'EN': {
-            title: 'Insurance Company',
-            description: 'Company that sells insurance products. Certificate of policies can be issued using Atala Prism.'
+            title: 'Verified Insurance Ltd.',
+            description: 'Verified Insurance Ltd. uses Atala PRISM to issue health insurance certificates securely and confidentially'
           }
         }
       },

@@ -64,44 +64,46 @@ class RayCasterClass extends BaseClass {
     }
 
     if (intersected.length > 0) {
-      this.mouseOver = true
+      if (intersected[0].object.popupActive) {
+        this.mouseOver = true
 
-      document.body.style.cursor = 'pointer'
+        document.body.style.cursor = 'pointer'
 
-      this.hovered = intersected[0].object
+        this.hovered = intersected[0].object
 
-      intersected[0].object.isHovered = true
-      intersected[0].object.isAnimating = true
+        intersected[0].object.isHovered = true
+        intersected[0].object.isAnimating = true
 
-      intersected[0].object.material.color.set(intersected[0].object.hoverColor)
+        intersected[0].object.material.color.set(intersected[0].object.hoverColor)
 
-      const rotationObject = intersected[0].object.clone()
+        const rotationObject = intersected[0].object.clone()
 
-      rotationObject.quaternion.copy(CameraClass.getInstance().camera.quaternion)
-      rotationObject.rotateX(Math.PI / 2)
+        rotationObject.quaternion.copy(CameraClass.getInstance().camera.quaternion)
+        rotationObject.rotateX(Math.PI / 2)
 
-      const moveQuaternion = new Quaternion()
-      const fromQuaternion = intersected[0].object.quaternion.clone()
+        const moveQuaternion = new Quaternion()
+        const fromQuaternion = intersected[0].object.quaternion.clone()
 
-      const params = {
-        rotationAmount: 0
-      }
-
-      this.isAnimating = true
-
-      gsap.to(params, {
-        rotationAmount: 1,
-        duration: 0.1,
-        ease: 'sine.out',
-        onUpdate: function () {
-          Quaternion.slerp(fromQuaternion, rotationObject.quaternion, moveQuaternion, params.rotationAmount)
-          intersected[0].object.quaternion.set(moveQuaternion.x, moveQuaternion.y, moveQuaternion.z, moveQuaternion.w)
+        const params = {
+          rotationAmount: 0
         }
-      })
 
-      setTimeout(() => {
-        intersected[0].object.isAnimating = false
-      }, 100)
+        this.isAnimating = true
+
+        gsap.to(params, {
+          rotationAmount: 1,
+          duration: 0.1,
+          ease: 'sine.out',
+          onUpdate: function () {
+            Quaternion.slerp(fromQuaternion, rotationObject.quaternion, moveQuaternion, params.rotationAmount)
+            intersected[0].object.quaternion.set(moveQuaternion.x, moveQuaternion.y, moveQuaternion.z, moveQuaternion.w)
+          }
+        })
+
+        setTimeout(() => {
+          intersected[0].object.isAnimating = false
+        }, 100)
+      }
     } else {
       this.intersects.forEach((object) => {
         if (object.isHovered && object.isAnimating === false) {

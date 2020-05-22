@@ -99,6 +99,7 @@ class StepIconClass extends BaseClass {
               const iconMesh = mesh.clone()
               iconMesh.material = this.material.clone()
 
+              iconMesh.popupActive = true
               iconMesh.description = this.icons[key].description
               iconMesh.title = this.icons[key].title
               iconMesh.type = this.icons[key].type

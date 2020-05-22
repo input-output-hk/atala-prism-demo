@@ -74,18 +74,6 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
   initLoader () {
     LoadingManagerClass.getInstance().init()
 
-    LoadingManagerClass.getInstance().loadingManager.onStart = function (url, itemsLoaded, itemsTotal) {
-      // console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.')
-    }
-
-    // LoadingManagerClass.getInstance().loadingManager.onLoad = function () {
-    // this.setState({
-    //   loaded: true
-    // })
-
-    // console.log('Loading complete!')
-    // }.bind(this)
-
     LoadingManagerClass.getInstance().loadingManager.onProgress = function (url, itemsLoaded, itemsTotal) {
       this.setState({
         itemsTotal: itemsTotal,
@@ -97,8 +85,6 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
           loaded: true
         })
       }
-
-      // console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.')
     }.bind(this)
 
     LoadingManagerClass.getInstance().loadingManager.onError = function (url) {
@@ -272,22 +258,13 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
 
     CameraClass.getInstance().resize(this.width, this.height)
     RendererClass.getInstance().resize(this.width, this.height)
-
-    if (this.config.post.enabled) {
-      this.composer.setSize(this.width, this.height)
-    }
   }
 
   destroy () {
-    RendererClass.getInstance().dispose()
+    RendererClass.getInstance().destroy()
     ControlsClass.getInstance().destroy()
 
-    if (this.composer) {
-      delete this.composer
-    }
-
     window.cancelAnimationFrame(this.animate)
-    this.running = false
   }
 
   preloader (props) {

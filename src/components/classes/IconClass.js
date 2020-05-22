@@ -179,6 +179,7 @@ class IconClass extends BaseClass {
               mesh.material = this.material.clone()
               const iconMesh = mesh.clone()
 
+              iconMesh.popupActive = false
               iconMesh.description = this.icons[key].description
               iconMesh.title = this.icons[key].title
               iconMesh.type = this.icons[key].type

@@ -17,7 +17,6 @@ class RendererClass extends BaseClass {
       alpha: true
     })
 
-    
     this.renderer.shadowMap.enabled = this.config.GPUTier.tier === 'GPU_DESKTOP_TIER_3'
     this.renderer.shadowMap.type = PCFSoftShadowMap // default THREE.PCFShadowMap
 
