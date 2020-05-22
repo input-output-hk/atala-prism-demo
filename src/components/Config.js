@@ -54,7 +54,7 @@ class Config {
         'EN': 'Smart City'
       },
       popupTitleCredentials: {
-        'EN': 'Credentials'
+        'EN': 'Issuing Authority'
       },
       icons: {
         '5G': {
