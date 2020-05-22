@@ -138,7 +138,7 @@ class Config {
         'insurance': {
           'EN': {
             title: 'Verified Insurance Ltd.',
-            description: 'Verified Insurance Ltd. uses Atala PRISM to issue health insurance certificates securely and confidentially'
+            description: 'Verified Insurance Ltd. uses Atala PRISM to issue health insurance certificates securely and confidentially.'
           }
         }
       },

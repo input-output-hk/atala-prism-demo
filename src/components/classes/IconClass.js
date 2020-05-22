@@ -23,7 +23,7 @@ import model from '../../assets/models/icon.glb'
 // textures
 import image5g from '../../assets/textures/5g.png'
 import imageWifi from '../../assets/textures/wifi.png'
-import imageGarden from '../../assets/textures/flower.png'
+// import imageGarden from '../../assets/textures/flower.png'
 import imageMobile from '../../assets/textures/mobile.png'
 import imageSolar from '../../assets/textures/solar.png'
 import imageWind from '../../assets/textures/wind.png'
@@ -88,14 +88,14 @@ class IconClass extends BaseClass {
           title: this.config.icons['wifi'][this.config.language].title,
           description: this.config.icons['wifi'][this.config.language].description
         },
-        'garden': {
-          category: 'smart',
-          type: 'garden',
-          url: imageGarden,
-          position: new Vector3(-38.5, 24, -19.1),
-          title: this.config.icons['garden'][this.config.language].title,
-          description: this.config.icons['garden'][this.config.language].description
-        },
+        // 'garden': {
+        //   category: 'smart',
+        //   type: 'garden',
+        //   url: imageGarden,
+        //   position: new Vector3(-38.5, 24, -19.1),
+        //   title: this.config.icons['garden'][this.config.language].title,
+        //   description: this.config.icons['garden'][this.config.language].description
+        // },
         'mobile': {
           category: 'smart',
           type: 'mobile',

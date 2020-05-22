@@ -52,7 +52,7 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
 
     this.initLoader()
 
-    this.itemsToLoad = 25 // TODO: this better
+    this.itemsToLoad = 24 // TODO: this better
 
     this.state = {
       loaded: false,
