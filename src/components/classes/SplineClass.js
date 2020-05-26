@@ -18,6 +18,8 @@ import StepClass from './StepClass'
 
 class SplineClass extends BaseClass {
   init (step = 0) {
+    this.tl = gsap.timeline()
+
     this.pointCount = 20
     this.geometries = []
     this.lines = []
@@ -74,10 +76,27 @@ class SplineClass extends BaseClass {
     StepClass.getInstance().on('setStep', (data) => {
       this.setStep(data.step)
     })
+
+    StepClass.getInstance().on('reset', (data) => {
+      this.reset()
+    })
+  }
+
+  reset () {
+    this.tl.kill()
+
+    for (let index = 0; index < StepClass.getInstance().steps; index++) {
+      this.geometries[index].drawRange.count = 0
+      CityClass.getInstance().stepBuildings[index].material = CityClass.getInstance().buildingMaterial.clone()
+    }
+
+    for (let index = 0; index < this.lines.length; index++) {
+      this.lines[index].material = this.material.clone()
+    }
   }
 
   setStep (step) {
-    const tl = gsap.timeline()
+    this.tl = gsap.timeline()
 
     for (let index = 0; index < this.lines.length; index++) {
       this.lines[index].material = this.visitedMaterial.clone()
@@ -97,7 +116,7 @@ class SplineClass extends BaseClass {
       for (let stepIndex = 1; stepIndex <= StepClass.getInstance().steps; stepIndex++) {
         CityClass.getInstance().stepBuildings[stepIndex - 1].material = CityClass.getInstance().buildingMaterial.clone()
       }
-      tl.to(params, {
+      this.tl.to(params, {
         drawRange: 50,
         duration: 2,
         ease: 'none',

@@ -28,6 +28,15 @@ class StepClass extends BaseClass {
     this.setStep()
   }
 
+  reset () {
+    // if (this.isIncrementing) {
+    //   return
+    // }
+    this.step = 0
+
+    this.emit('reset')
+  }
+
   setStep (step) {
     if (step) {
       this.step = step

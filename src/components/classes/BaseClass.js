@@ -31,8 +31,7 @@ class BaseClass extends EventEmitter {
    * Initialize class properties
    */
   init () {
-    const instance = this.constructor.getInstance()
-    Object.freeze(instance)
+    this.constructor.getInstance()
   }
 
   /**

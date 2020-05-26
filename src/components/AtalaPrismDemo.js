@@ -96,6 +96,10 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
     this.initStage()
   }
 
+  componentWillUnmount () {
+    this.destroy()
+  }
+
   setConfigFromURLParams () {
     const step = parseInt(getUrlParameter('step'))
     if (!isNaN(step)) {
@@ -110,6 +114,10 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
 
   incrementStep () {
     StepClass.getInstance().incrementStep()
+  }
+
+  reset () {
+    StepClass.getInstance().reset()
   }
 
   setStep (step) {
@@ -167,7 +175,7 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
   }
 
   animate () {
-    window.requestAnimationFrame(this.animate.bind(this))
+    this.animationReq = window.requestAnimationFrame(this.animate.bind(this))
     this.renderFrame()
   }
 
@@ -261,10 +269,10 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
   }
 
   destroy () {
+    window.removeEventListener('resize', this.resize)
     RendererClass.getInstance().destroy()
-    ControlsClass.getInstance().destroy()
-
-    window.cancelAnimationFrame(this.animate)
+    CitySceneClass.getInstance().destroy()
+    window.cancelAnimationFrame(this.animationReq)
   }
 
   preloader (props) {

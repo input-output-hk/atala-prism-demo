@@ -45,7 +45,7 @@ class CameraClass extends BaseClass {
         camPosZ: this.camera.position.z
       }
 
-      gsap.to(params, {
+      this.anim = gsap.to(params, {
         camPosX: newCamPos.x,
         camPosY: newCamPos.y,
         camPosZ: newCamPos.z,
@@ -65,6 +65,14 @@ class CameraClass extends BaseClass {
         }.bind(this)
       })
     })
+
+    StepClass.getInstance().on('reset', (data) => {
+      this.reset()
+    })
+  }
+
+  reset () {
+    this.anim.kill()
   }
 
   resize (width, height) {
