@@ -11,7 +11,7 @@ class RendererClass extends BaseClass {
   init () {
     this.canvas = document.querySelector('#' + this.config.scene.canvasID)
     this.renderer = new WebGLRenderer({
-      antialias: this.config.GPUTier.tier === 'GPU_DESKTOP_TIER_3' || this.config.GPUTier.tier === 'GPU_DESKTOP_TIER_2',
+      antialias: true,
       canvas: this.canvas,
       powerPreference: 'high-performance',
       alpha: true
