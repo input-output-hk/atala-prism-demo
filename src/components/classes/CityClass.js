@@ -101,10 +101,6 @@ class CityClass extends BaseClass {
                     tree.material = this.treeMaterial
                     tree.receiveShadow = true
                     tree.castShadow = true
-
-                    // tree.children[1].material = this.roadsMaterial
-                    // tree.children[1].receiveShadow = true
-                    // tree.children[1].castShadow = true
                   })
                 })
                 break

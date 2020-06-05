@@ -36,6 +36,7 @@ import UserIconClass from './classes/UserIconClass'
 import DatGUIClass from './classes/DatGUIClass'
 import StepClass from './classes/StepClass'
 import RayCasterClass from './classes/RayCasterClass'
+import GardenClass from './classes/GardenClass'
 
 /* ------------------------------------------
 Styles
@@ -52,7 +53,7 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
 
     this.initLoader()
 
-    this.itemsToLoad = 24 // TODO: this better
+    this.itemsToLoad = 26 // TODO: this better
 
     this.state = {
       loaded: false,
@@ -142,34 +143,44 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
         StepIconClass.getInstance().init().then((stepIconModel) => {
           UserIconClass.getInstance().init().then((userIconModel) => {
             SplineClass.getInstance().init(this.step)
-            GroundClass.getInstance().init()
+            GardenClass.getInstance().init().then((gardenModel) => {
+              GroundClass.getInstance().init()
 
-            ControlsClass.getInstance().init()
-            MouseClass.getInstance().init()
-            TouchClass.getInstance().init()
+              ControlsClass.getInstance().init()
+              MouseClass.getInstance().init()
+              TouchClass.getInstance().init()
 
-            this.addEvents()
-            this.buildScene(model, iconModel, stepIconModel, userIconModel)
+              this.addEvents()
+              this.buildScene(
+                model,
+                iconModel,
+                stepIconModel,
+                userIconModel,
+                gardenModel
+              )
 
-            this.animate()
+              this.animate()
+            })
           })
         })
       })
     })
   }
 
-  buildScene (model, iconModel, stepIconModel, userIconModel) {
+  buildScene (model, iconModel, stepIconModel, userIconModel, gardenModel) {
     CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().light)
     CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().light.target)
     // CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().lightHelper)
     // CitySceneClass.getInstance().scene.add(SpotLightClass.getInstance().shadowHelper)
 
     CitySceneClass.getInstance().scene.add(GroundClass.getInstance().mesh)
+    CitySceneClass.getInstance().scene.add(GardenClass.getInstance().mesh)
     CitySceneClass.getInstance().scene.add(AmbientLightClass.getInstance().light)
     CitySceneClass.getInstance().scene.add(model)
     CitySceneClass.getInstance().scene.add(iconModel)
     CitySceneClass.getInstance().scene.add(stepIconModel)
     CitySceneClass.getInstance().scene.add(userIconModel)
+    CitySceneClass.getInstance().scene.add(gardenModel)
 
     CitySceneClass.getInstance().scene.add(SplineClass.getInstance().mesh)
   }

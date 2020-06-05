@@ -75,7 +75,7 @@
     "standard": "^12.0.1",
     "style-loader": "^0.23.1",
     "styled-components": "^4.3.2",
-    "three": "^0.115.0",
+    "three": "^0.117.1",
     "url-loader": "^2.2.0",
     "webpack": "^4.35.2",
     "webpack-cli": "^3.3.5",
