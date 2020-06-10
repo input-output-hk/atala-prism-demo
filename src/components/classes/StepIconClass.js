@@ -80,7 +80,7 @@ class StepIconClass extends BaseClass {
       const promises = Object.keys(this.icons).map(key => {
         return loadImage(this.icons[key].url).then(texture => {
           texture.flipY = false
-          texture.anisotropy = RendererClass.getInstance().renderer.getMaxAnisotropy()
+          texture.anisotropy = RendererClass.getInstance().renderer.capabilities.getMaxAnisotropy()
           this.icons[key].texture = texture
         })
       })

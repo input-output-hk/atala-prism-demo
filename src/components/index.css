@@ -1,9 +1,16 @@
 .container {
+    outline: none;
     font-family: 'Open Sans', sans-serif;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.container:focus,
+.container *,
+.container *:focus {
+    outline: none;
 }
 
 .tooltip {

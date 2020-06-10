@@ -157,7 +157,7 @@ class IconClass extends BaseClass {
       const promises = Object.keys(this.icons).map(key => {
         return loadImage(this.icons[key].url).then(texture => {
           texture.flipY = false
-          texture.anisotropy = RendererClass.getInstance().renderer.getMaxAnisotropy()
+          texture.anisotropy = RendererClass.getInstance().renderer.capabilities.getMaxAnisotropy()
           texture.wrapS = MirroredRepeatWrapping
           texture.repeat.set(2, 2)
           texture.offset.y = -1
