@@ -61,7 +61,7 @@ class UserIconClass extends BaseClass {
             const mesh = gltf.scene.children[0]
 
             mesh.rotateZ(Math.PI)
-            mesh.scale.set(0.9, 0.6, 0.9)
+            mesh.scale.set(2.9, 2.6, 2.9)
 
             for (const key in this.icons) {
               const iconMesh = mesh.clone()

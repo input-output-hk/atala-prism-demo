@@ -2,6 +2,7 @@
 3rd Party
 ------------------------------------------ */
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {
   Clock
 } from 'three'
@@ -147,6 +148,8 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
               GroundClass.getInstance().init()
 
               ControlsClass.getInstance().init()
+              ControlsClass.getInstance().controls.enabled = this.props.controlsEnabled
+
               MouseClass.getInstance().init()
               TouchClass.getInstance().init()
 
@@ -335,6 +338,12 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
     }
   }
 
+  componentDidUpdate (prevProps) {
+    if (this.props.controlsEnabled !== prevProps.controlsEnabled) {
+      ControlsClass.getInstance().controls.enabled = this.props.controlsEnabled
+    }
+  }
+
   render () {
     return (
       <div className={styles.container}>
@@ -356,6 +365,10 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
       </div>
     )
   }
+}
+
+AtalaPrismDemo.propTypes = {
+  controlsEnabled: PropTypes.bool
 }
 
 export default AtalaPrismDemo
