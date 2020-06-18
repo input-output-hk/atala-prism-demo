@@ -148,7 +148,7 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
               GroundClass.getInstance().init()
 
               ControlsClass.getInstance().init()
-              ControlsClass.getInstance().controls.enabled = this.props.controlsEnabled
+              ControlsClass.getInstance().controls.enableZoom = this.props.controlsEnabled
 
               MouseClass.getInstance().init()
               TouchClass.getInstance().init()
@@ -340,7 +340,7 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
 
   componentDidUpdate (prevProps) {
     if (this.props.controlsEnabled !== prevProps.controlsEnabled) {
-      ControlsClass.getInstance().controls.enabled = this.props.controlsEnabled
+      ControlsClass.getInstance().controls.enableZoom = this.props.controlsEnabled
     }
   }
 
