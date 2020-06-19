@@ -40,7 +40,7 @@ class UserIconClass extends BaseClass {
       this.icons = {
         'user': {
           url: imageUser,
-          position: new Vector3(26, 17, 55.2)
+          position: new Vector3(-8, 5, 33)
         }
       }
 
