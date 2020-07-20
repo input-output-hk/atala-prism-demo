@@ -90,7 +90,7 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
     }.bind(this)
 
     LoadingManagerClass.getInstance().loadingManager.onError = function (url) {
-      console.log('There was an error loading ' + url)
+      // console.log('There was an error loading ' + url)
     }
   }
 
