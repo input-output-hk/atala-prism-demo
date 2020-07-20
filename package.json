@@ -1,6 +1,6 @@
 {
   "name": "atala-prism-demo",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Atala Prism Demo",
   "main": "build/index.js",
   "files": [
