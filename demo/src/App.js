@@ -21,7 +21,7 @@ class App extends Component {
 
   render () {
     return (
-      <AtalaPrismDemo ref='demo' controlsEnabled={this.state.controlsEnabled} />
+      <AtalaPrismDemo controlsEnabled={this.state.controlsEnabled} />
     )
   }
 }
