@@ -44,10 +44,6 @@ class MouseClass extends BaseClass {
 
     super.onMouseMove()
   }
-
-  renderFrame ({ dt } = {}) {
-    super.renderFrame()
-  }
 }
 
 export default MouseClass

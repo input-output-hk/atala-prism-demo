@@ -9,6 +9,8 @@ import {
 
 import EventEmitter from 'eventemitter3'
 import mixin from 'mixin'
+import { getGPUTier } from 'detect-gpu'
+
 import { getUrlParameter } from '../helpers/utility'
 
 /* ------------------------------------------
@@ -73,6 +75,15 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
     window.atalaPrismDemo = this
   }
 
+  initGPUTier () {
+    return new Promise((resolve, reject) => {
+      getGPUTier().then(GPUTier => {
+        this.config.GPUTier = GPUTier
+        resolve()
+      })
+    })
+  }
+
   initLoader () {
     LoadingManagerClass.getInstance().init()
 
@@ -127,42 +138,44 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
   }
 
   initStage () {
-    this.setConfigFromURLParams()
+    this.initGPUTier().then(() => {
+      this.setConfigFromURLParams()
 
-    DatGUIClass.getInstance().init(this.debug)
-    StepClass.getInstance().init()
+      DatGUIClass.getInstance().init(this.debug)
+      StepClass.getInstance().init()
 
-    CameraClass.getInstance().init()
-    RendererClass.getInstance().init()
-    RayCasterClass.getInstance().init()
-    AmbientLightClass.getInstance().init()
-    SpotLightClass.getInstance().init()
+      CameraClass.getInstance().init()
+      RendererClass.getInstance().init()
+      RayCasterClass.getInstance().init()
+      AmbientLightClass.getInstance().init()
+      SpotLightClass.getInstance().init()
 
-    CitySceneClass.getInstance().init()
-    CityClass.getInstance().init().then((model) => {
-      IconClass.getInstance().init().then((iconModel) => {
-        StepIconClass.getInstance().init().then((stepIconModel) => {
-          UserIconClass.getInstance().init().then((userIconModel) => {
-            SplineClass.getInstance().init(this.step)
-            GardenClass.getInstance().init().then((gardenModel) => {
-              GroundClass.getInstance().init()
+      CitySceneClass.getInstance().init()
+      CityClass.getInstance().init().then((model) => {
+        IconClass.getInstance().init().then((iconModel) => {
+          StepIconClass.getInstance().init().then((stepIconModel) => {
+            UserIconClass.getInstance().init().then((userIconModel) => {
+              SplineClass.getInstance().init(this.step)
+              GardenClass.getInstance().init().then((gardenModel) => {
+                GroundClass.getInstance().init()
 
-              ControlsClass.getInstance().init()
-              ControlsClass.getInstance().controls.enableZoom = this.props.controlsEnabled
+                ControlsClass.getInstance().init()
+                ControlsClass.getInstance().controls.enableZoom = this.props.controlsEnabled
 
-              MouseClass.getInstance().init()
-              TouchClass.getInstance().init()
+                MouseClass.getInstance().init()
+                TouchClass.getInstance().init()
 
-              this.addEvents()
-              this.buildScene(
-                model,
-                iconModel,
-                stepIconModel,
-                userIconModel,
-                gardenModel
-              )
+                this.addEvents()
+                this.buildScene(
+                  model,
+                  iconModel,
+                  stepIconModel,
+                  userIconModel,
+                  gardenModel
+                )
 
-              this.animate()
+                this.animate()
+              })
             })
           })
         })

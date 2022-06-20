@@ -1,6 +1,5 @@
 import {
   TextureLoader,
-  MeshToonMaterial,
   Group,
   Vector3
 } from 'three'
@@ -14,6 +13,8 @@ import RendererClass from './RendererClass'
 // import DatGUIClass from './DatGUIClass'
 // import RayCasterClass from './RayCasterClass'
 
+import CustomToonMaterial from './materials/CustomToonMaterial'
+
 // models
 import model from '../../assets/models/user-icon.glb'
 
@@ -26,8 +27,8 @@ class UserIconClass extends BaseClass {
       this.GLTFLoader = new GLTFLoader(LoadingManagerClass.getInstance().loadingManager)
       this.imageLoader = new TextureLoader(LoadingManagerClass.getInstance().loadingManager)
 
-      this.material = new MeshToonMaterial({
-        flatShading: false
+      this.material = new CustomToonMaterial({
+        color: this.config.materials.stepIconColor
       })
 
       let that = this
@@ -90,10 +91,6 @@ class UserIconClass extends BaseClass {
     }).catch((e) => {
       console.log(e)
     })
-  }
-
-  renderFrame ({ dt } = {}) {
-
   }
 }
 

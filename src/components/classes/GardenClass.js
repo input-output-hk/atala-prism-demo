@@ -34,7 +34,6 @@ class GardenClass extends BaseClass {
 
         this.material = new MeshLambertMaterial({
           color: 0xffffff,
-          flatShading: true,
           map: this.map
         })
 

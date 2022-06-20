@@ -25,10 +25,6 @@ class RayCasterClass extends BaseClass {
     // controls.addColor(this, 'hoverColor').name('hoverColor')
   }
 
-  resize (width, height) {
-
-  }
-
   onMouseDown (mouseEvent) {
     if (!this.hovered) {
       return
@@ -95,7 +91,7 @@ class RayCasterClass extends BaseClass {
           duration: 0.1,
           ease: 'sine.out',
           onUpdate: function () {
-            Quaternion.slerp(fromQuaternion, rotationObject.quaternion, moveQuaternion, params.rotationAmount)
+            moveQuaternion.slerpQuaternions(fromQuaternion, rotationObject.quaternion, params.rotationAmount)
             intersected[0].object.quaternion.set(moveQuaternion.x, moveQuaternion.y, moveQuaternion.z, moveQuaternion.w)
           }
         })
@@ -107,7 +103,7 @@ class RayCasterClass extends BaseClass {
     } else {
       this.intersects.forEach((object) => {
         if (object.isHovered && object.isAnimating === false) {
-          object.material.color.set(0xffffff)
+          object.material.color.set(this.config.materials.stepIconColor)
 
           const rotationObject = object.clone()
 
@@ -125,7 +121,7 @@ class RayCasterClass extends BaseClass {
             duration: 0.1,
             ease: 'sine.out',
             onUpdate: function () {
-              Quaternion.slerp(fromQuaternion, rotationObject.quaternion, moveQuaternion, params.rotationAmount)
+              moveQuaternion.slerpQuaternions(fromQuaternion, rotationObject.quaternion, params.rotationAmount)
               object.quaternion.set(moveQuaternion.x, moveQuaternion.y, moveQuaternion.z, moveQuaternion.w)
             },
             onComplete: function () {

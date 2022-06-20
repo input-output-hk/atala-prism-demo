@@ -59,9 +59,6 @@ module.exports = {
             options: {
               modules: true
             }
-          },
-          {
-            loader: 'sass-loader'
           }
         ]
 

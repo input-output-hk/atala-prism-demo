@@ -56,10 +56,6 @@ class StepClass extends BaseClass {
 
     this.isIncrementing = false
   }
-
-  renderFrame ({ dt } = {}) {
-
-  }
 }
 
 export default StepClass

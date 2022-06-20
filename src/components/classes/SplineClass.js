@@ -25,7 +25,7 @@ class SplineClass extends BaseClass {
     this.lines = []
 
     this.material = new LineDashedMaterial({
-      color: 0xff0000,
+      color: this.config.materials.stepIconColor,
       dashSize: 1,
       gapSize: 0.8
     })
@@ -131,10 +131,6 @@ class SplineClass extends BaseClass {
       }
       )
     }
-  }
-
-  renderFrame ({ dt } = {}) {
-
   }
 }
 
