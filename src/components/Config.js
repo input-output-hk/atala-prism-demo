@@ -6,8 +6,6 @@ import {
 
 import Detector from '../libs/Detector'
 
-import { getGPUTier } from 'detect-gpu'
-
 class Config {
   constructor () {
     if (!Config.instance) {
@@ -19,8 +17,6 @@ class Config {
   }
 
   init () {
-    const GPUTier = getGPUTier()
-
     this.data = {
       rootID: 'atala-prism-demo-root',
       language: 'EN',
@@ -36,8 +32,10 @@ class Config {
         ambientLightIntensity: 0.72
       },
       materials: {
+        stepIconColor: 0xf26660,
+        stepIconColorHover: 0xff7c76,
         buildingColor: 0xdde9ff,
-        buildingHighlightColor: 0xef3b39,
+        buildingHighlightColor: 0xf26660,
         roadsColor: 0xaaaaaa,
         vehicleColor: 0xe4c2fc,
         treeColor: 0x9efe59,
@@ -169,7 +167,7 @@ class Config {
         far: 1000,
         enableZoom: true // enable camera zoom on mousewheel/pinch gesture
       },
-      GPUTier: GPUTier,
+      GPUTier: null,
       detector: Detector,
       floatType: Detector.isIOS ? HalfFloatType : FloatType
     }
@@ -180,7 +178,7 @@ class Config {
   }
 }
 
-const instance = new Config()
-Object.freeze(instance)
+// const instance = new Config()
+// Object.freeze(instance)
 
 export default Config

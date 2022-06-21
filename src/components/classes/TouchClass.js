@@ -61,10 +61,6 @@ class TouchClass extends BaseClass {
   onTouchEnd (e) {
     this.updateTouchPos(e)
   }
-
-  renderFrame ({ dt } = {}) {
-    super.renderFrame()
-  }
 }
 
 export default TouchClass

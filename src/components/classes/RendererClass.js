@@ -17,8 +17,8 @@ class RendererClass extends BaseClass {
       alpha: true
     })
 
-    this.renderer.shadowMap.enabled = this.config.GPUTier.tier === 'GPU_DESKTOP_TIER_3'
-    this.renderer.shadowMap.type = PCFSoftShadowMap // default THREE.PCFShadowMap
+    this.renderer.shadowMap.enabled = this.config.GPUTier.tier === 3
+    this.renderer.shadowMap.type = PCFSoftShadowMap
 
     this.renderer.setClearColor(0xffffff, 0)
 
@@ -32,7 +32,9 @@ class RendererClass extends BaseClass {
   }
 
   destroy () {
-    this.renderer.dispose()
+    if (this.renderer) {
+      this.renderer.dispose()
+    }
 
     super.destroy()
   }

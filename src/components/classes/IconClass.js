@@ -44,8 +44,7 @@ class IconClass extends BaseClass {
 
       this.material = new MeshToonMaterial({
         color: new Color(0xffffff),
-        emissive: new Color(0x000000),
-        flatShading: false
+        emissive: new Color(0x000000)
       })
 
       let that = this
@@ -215,10 +214,6 @@ class IconClass extends BaseClass {
     }).catch((e) => {
       console.log(e)
     })
-  }
-
-  renderFrame ({ dt } = {}) {
-
   }
 }
 

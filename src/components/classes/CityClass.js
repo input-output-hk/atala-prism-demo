@@ -8,7 +8,6 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 // classes
 import BaseClass from './BaseClass'
 import LoadingManagerClass from './LoadingManagerClass'
-import DatGUIClass from './DatGUIClass'
 
 // models
 import model from '../../assets/models/city.glb'

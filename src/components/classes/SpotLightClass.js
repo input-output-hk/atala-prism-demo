@@ -50,10 +50,10 @@ class SpotLightClass extends BaseClass {
     super.init()
   }
 
-  renderFrame () {
-    //this.lightHelper.update()
-    //this.shadowHelper.update()
-  }
+  // renderFrame () {
+  // this.lightHelper.update()
+  // this.shadowHelper.update()
+  // }
 }
 
 export default SpotLightClass

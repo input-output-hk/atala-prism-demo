@@ -1,6 +1,5 @@
 import {
   TextureLoader,
-  MeshToonMaterial,
   Group,
   Vector3
 } from 'three'
@@ -22,17 +21,18 @@ import imageGov from '../../assets/textures/gov.png'
 import imageUni from '../../assets/textures/uni.png'
 import imageJob from '../../assets/textures/job.png'
 import imageInsurance from '../../assets/textures/insurance.png'
+import CustomToonMaterial from './materials/CustomToonMaterial'
 
 class StepIconClass extends BaseClass {
   init () {
-    this.hoverColor = 0xffc4c4
+    this.hoverColor = this.config.materials.stepIconColorHover
 
     return new Promise((resolve, reject) => {
       this.GLTFLoader = new GLTFLoader(LoadingManagerClass.getInstance().loadingManager)
       this.imageLoader = new TextureLoader(LoadingManagerClass.getInstance().loadingManager)
 
-      this.material = new MeshToonMaterial({
-        flatShading: false
+      this.material = new CustomToonMaterial({
+        color: this.config.materials.stepIconColor
       })
 
       let that = this
@@ -137,10 +137,6 @@ class StepIconClass extends BaseClass {
     }).catch((e) => {
       console.log(e)
     })
-  }
-
-  renderFrame ({ dt } = {}) {
-
   }
 }
 

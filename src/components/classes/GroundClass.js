@@ -12,8 +12,7 @@ class GroundClass extends BaseClass {
   init () {
     const geo = new BoxBufferGeometry(135, 1.0, 135)
     this.material = new MeshLambertMaterial({
-      color: this.config.materials.groundColor,
-      flatShading: true
+      color: this.config.materials.groundColor
     })
 
     // CityClass.getInstance().controls.addColor(this.config.materials, 'groundColor').name('Ground Color').onChange((color) => {

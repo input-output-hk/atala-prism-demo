@@ -81,10 +81,6 @@ class CameraClass extends BaseClass {
     this.camera.updateProjectionMatrix()
     super.resize()
   }
-
-  renderFrame ({ dt } = {}) {
-
-  }
 }
 
 export default CameraClass
