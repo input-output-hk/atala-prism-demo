@@ -54,6 +54,8 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
     this.clock = new Clock()
     this.debug = false
 
+    this.mounted = false
+
     this.initLoader()
 
     this.itemsToLoad = 26 // TODO: this better
@@ -106,7 +108,10 @@ class AtalaPrismDemo extends mixin(EventEmitter, Component) {
   }
 
   componentDidMount () {
-    this.initStage()
+    if (!this.mounted) {
+      this.initStage()
+      this.mounted = true
+    }
   }
 
   componentWillUnmount () {
