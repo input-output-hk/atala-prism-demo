@@ -32,7 +32,9 @@ class RendererClass extends BaseClass {
   }
 
   destroy () {
-    this.renderer.dispose()
+    if (this.renderer) {
+      this.renderer.dispose()
+    }
 
     super.destroy()
   }

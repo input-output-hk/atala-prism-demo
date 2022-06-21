@@ -16,14 +16,16 @@ class CitySceneClass extends BaseClass {
   }
 
   destroy () {
-    this.scene.traverse(function (object) {
-      if (object.geometry) {
-        object.geometry.dispose()
-      }
-      if (object.material) {
-        object.material.dispose()
-      }
-    })
+    if (this.scene) {
+      this.scene.traverse(function (object) {
+        if (object.geometry) {
+          object.geometry.dispose()
+        }
+        if (object.material) {
+          object.material.dispose()
+        }
+      })
+    }
 
     super.destroy()
   }

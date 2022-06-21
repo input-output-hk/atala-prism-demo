@@ -1,6 +1,5 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   entry: {
@@ -25,18 +24,6 @@ module.exports = {
         use: [
           require.resolve('raw-loader'),
           require.resolve('glslify-loader')
-        ]
-      },
-      {
-        test: /\.md$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'html-loader'
-          },
-          {
-            loader: 'markdown-loader'
-          }
         ]
       },
       // "url" loader works like "file" loader except that it embeds assets
@@ -69,8 +56,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html'
-    }),
-    new BundleAnalyzerPlugin()
+    })
   ],
   devtool: 'inline-source-map',
   mode: 'development'
