@@ -26,7 +26,7 @@ class CityClass extends BaseClass {
       // Configure and create Draco decoder.
       this.dracoLoader = new DRACOLoader()
 
-      this.dracoLoader.setDecoderPath('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/')
+      this.dracoLoader.setDecoderPath('https://raw.githubusercontent.com/mrdoob/three.js/r141/examples/js/libs/draco/')
       this.GLTFLoader.setDRACOLoader(this.dracoLoader)
 
       this.buildingMaterial = new MeshPhongMaterial({
